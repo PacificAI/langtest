@@ -1014,9 +1014,7 @@ class MedFuzz(BaseClinical):
                     confidence=ot["confidence_scores"],
                 )
 
-                # med_sample.perturbed_context = llm_attacker.generate_modified_question(
-                #     med_sample.original_question
-                # )
+                # generate the perturbed question
                 med_sample.perturbed_question = llm_attacker.generate_modified_question(
                     med_sample.original_question
                 )
@@ -1036,22 +1034,20 @@ class MedFuzz(BaseClinical):
 
     @staticmethod
     async def run(sample_list: List[Sample], model: ModelAPI, *args, **kwargs):
-        # return super().run(*args, **kwargs)
-        from langtest.transform.utils import TargetLLM
 
         progress_bar = kwargs.get("progress_bar", False)
 
         for sample in sample_list:
             if sample.state != "done":
-                target_llm = TargetLLM(model)
-
-                response = target_llm.process_user_text(sample.perturbed_question)
-
-                sample.actual_results = response.get("final_answer", "")
-
-                # del
-                del target_llm
-
+                original_text_input = build_qa_input(
+                    context=sample.original_context,
+                    question=sample.original_question,
+                    options=sample.options,
+                )
+                prompt = build_qa_prompt(
+                    original_text_input, "default_question_answering_prompt", **kwargs
+                )
+                sample.actual_results = model(original_text_input, prompt=prompt)
                 sample.state = "done"
 
             if progress_bar:
