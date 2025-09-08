@@ -3369,23 +3369,21 @@ class DialogueToSummarySample(BaseModel):
 class ShuffleOptions(QASample):
     perturbed_options: Optional[str] = None
 
-    def shuffle(self, pattern: str = "\n|,"):
+    def shuffle(self, pattern: str = "\n"):
         """Shuffle the options in the question."""
         import random
-
-        random.seed(42)
 
         if not self.options:
             return
 
         # Split and clean options
-        options_list = re.split(pattern, self.options.strip())
+        options_list = re.split(r'\n(?=[A-Z]\.)|,\s*(?=[A-Z]\.)', self.options.strip())
         cleaned_options = [
-            re.sub(r"^[A-E]\.\s*", "", opt.strip()) for opt in options_list if opt.strip()
+            re.sub(r"^[A-Z]\.\s*", "", opt.strip()) for opt in options_list if opt.strip()
         ]
 
         # Shuffle and relabel
-        random.shuffle(cleaned_options)
+        cleaned_options = random.sample(cleaned_options, k=len(cleaned_options))
         labeled_options = [
             f"{chr(65 + i)}. {opt}" for i, opt in enumerate(cleaned_options)
         ]
@@ -3398,14 +3396,14 @@ class ShuffleOptions(QASample):
 
         # Extract options
         original_options = re.findall(
-            r"^[A-E]\.\s*(.*)", self.options.strip(), re.MULTILINE
+            r"^[A-Z]\.\s*(.*)", self.options.strip(), re.MULTILINE
         )
         perturbed_options = re.findall(
-            r"^([A-E])\.\s*(.*)", self.perturbed_options.strip(), re.MULTILINE
+            r"^([A-Z])\.\s*(.*)", self.perturbed_options.strip(), re.MULTILINE
         )
 
         # Get correct answer text
-        match = re.match(r"^([A-E])", self.expected_results.strip().upper())
+        match = re.match(r"^([A-Z])", self.expected_results.strip().upper())
         if not match:
             self.ran_pass = False
             return self.ran_pass
@@ -3436,11 +3434,11 @@ class ShuffleOptions(QASample):
         actual_text = self.actual_results.strip()
 
         # Check if actual_results is just a label (e.g., "C")
-        if re.match(r"^[A-E]$", actual_text):
+        if re.match(r"^[A-Z]$", actual_text):
             selected_label = actual_text
         # Check if actual_results starts with a label (e.g., "C. Text...")
-        elif re.match(r"^([A-E])\.", actual_text):
-            selected_label = re.match(r"^([A-E])\.", actual_text).group(1)
+        elif re.match(r"^([A-Z])\.", actual_text):
+            selected_label = re.match(r"^([A-Z])\.", actual_text).group(1)
         else:
             # If actual_results is the full text, find matching option
             selected_label = None
