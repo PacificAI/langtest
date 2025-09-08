@@ -3371,23 +3371,38 @@ class ShuffleOptions(QASample):
 
     def shuffle(self, pattern: str = "\n"):
         """Shuffle the options in the question."""
-        import random
 
         if not self.options:
             return
 
         # Split and clean options
-        options_list = re.split(r'\n(?=[A-Z]\.)|,\s*(?=[A-Z]\.)', self.options.strip())
+        options_list = re.split(r"\n(?=[A-Z]\.)|,\s*(?=[A-Z]\.)", self.options.strip())
         cleaned_options = [
             re.sub(r"^[A-Z]\.\s*", "", opt.strip()) for opt in options_list if opt.strip()
         ]
 
         # Shuffle and relabel
-        cleaned_options = random.sample(cleaned_options, k=len(cleaned_options))
+        cleaned_options = self.__random_shuffle(cleaned_options)
         labeled_options = [
             f"{chr(65 + i)}. {opt}" for i, opt in enumerate(cleaned_options)
         ]
         self.perturbed_options = "\n".join(labeled_options)
+
+    def __random_shuffle(self, lst: List[str]) -> List[str]:
+
+        import random
+
+        # Implementing Sattolo's algorithm for derangement
+        a = lst[:]
+        n = len(a)
+        if n < 2:
+            raise ValueError("No derangement exists for lists of length < 2")
+
+        # Sattolo: j in [0, i-1] (never equal to i)
+        for i in range(n - 1, 0, -1):
+            j = random.randrange(0, i)  # 0 .. i-1
+            a[i], a[j] = a[j], a[i]
+        return a
 
     def _is_eval(self) -> bool:
         if not all([self.expected_results, self.actual_results, self.perturbed_options]):
