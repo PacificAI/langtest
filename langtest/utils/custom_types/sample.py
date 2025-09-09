@@ -17,6 +17,8 @@ from typing import (
 from copy import deepcopy
 from PIL.Image import Image
 
+from langtest.metrics.eval_prompts import MENTAL_HEALTH_EVAL_PROMPT
+from langtest.metrics.llm_eval import RatingEval
 from langtest.modelhandler.modelhandler import ModelAPI
 from ...errors import Errors
 from pydantic import BaseModel, ConfigDict, PrivateAttr, Field, field_validator
@@ -3287,17 +3289,27 @@ class DialogueToSummarySample(BaseModel):
             return self.ran_pass
 
         self.feedback = self._is_eval()
-        if self.feedback.get("Overall Quality", 0) >= self.threshold:
+        # Calculate overall quality if feedback contains numeric values
+        if isinstance(self.feedback, dict) and self.feedback:
+            numeric_values = [
+                v for v in self.feedback.values() if isinstance(v, (int, float))
+            ]
+            if numeric_values:
+                avg = sum(numeric_values) / len(numeric_values)
+                self.feedback["Overall Quality"] = avg
+
+        # Check if sample passes based on threshold
+        overall_quality = (
+            self.feedback.get("Overall Quality", 0)
+            if isinstance(self.feedback, dict)
+            else 0
+        )
+        if overall_quality >= self.threshold:
             self.ran_pass = True
-            return True
-        elif self.feedback.values() and any(
-            value >= self.threshold for value in self.feedback.values()
-        ):
-            self.ran_pass = True
-            return True
         else:
             self.ran_pass = False
-            return False
+
+        return self.ran_pass
 
     def _is_eval(self) -> Dict[str, float]:
         """
@@ -3339,7 +3351,7 @@ class DialogueToSummarySample(BaseModel):
             # Evaluation logic
             llm_eval = SummaryEval(
                 llm=self.__eval_model,
-                input_variables=["dialogue", "generated_summary"],
+                input_variables=["dialogue", "summary"],
             )
 
             results = llm_eval.evaluate(
@@ -3347,7 +3359,7 @@ class DialogueToSummarySample(BaseModel):
                     "dialogue": self.dialogue,
                 },
                 predictions={
-                    "generated_summary": self.actual_results,
+                    "summary": self.actual_results,
                 },
             )
         # rouge evaluation
@@ -3367,27 +3379,40 @@ class DialogueToSummarySample(BaseModel):
 class ShuffleOptions(QASample):
     perturbed_options: Optional[str] = None
 
-    def shuffle(self, pattern: str = "\n|,"):
+    def shuffle(self, pattern: str = "\n"):
         """Shuffle the options in the question."""
-        import random
-
-        random.seed(42)
 
         if not self.options:
             return
 
         # Split and clean options
-        options_list = re.split(pattern, self.options.strip())
+        options_list = re.split(r"\n(?=[A-Z]\.)|,\s*(?=[A-Z]\.)", self.options.strip())
         cleaned_options = [
-            re.sub(r"^[A-E]\.\s*", "", opt.strip()) for opt in options_list if opt.strip()
+            re.sub(r"^[A-Z]\.\s*", "", opt.strip()) for opt in options_list if opt.strip()
         ]
 
         # Shuffle and relabel
-        random.shuffle(cleaned_options)
+        cleaned_options = self.__random_shuffle(cleaned_options)
         labeled_options = [
             f"{chr(65 + i)}. {opt}" for i, opt in enumerate(cleaned_options)
         ]
         self.perturbed_options = "\n".join(labeled_options)
+
+    def __random_shuffle(self, lst: List[str]) -> List[str]:
+
+        import random
+
+        # Implementing Sattolo's algorithm for derangement
+        a = lst[:]
+        n = len(a)
+        if n < 2:
+            raise ValueError("No derangement exists for lists of length < 2")
+
+        # Sattolo: j in [0, i-1] (never equal to i)
+        for i in range(n - 1, 0, -1):
+            j = random.randrange(0, i)  # 0 .. i-1
+            a[i], a[j] = a[j], a[i]
+        return a
 
     def _is_eval(self) -> bool:
         if not all([self.expected_results, self.actual_results, self.perturbed_options]):
@@ -3396,14 +3421,14 @@ class ShuffleOptions(QASample):
 
         # Extract options
         original_options = re.findall(
-            r"^[A-E]\.\s*(.*)", self.options.strip(), re.MULTILINE
+            r"^[A-Z]\.\s*(.*)", self.options.strip(), re.MULTILINE
         )
         perturbed_options = re.findall(
-            r"^([A-E])\.\s*(.*)", self.perturbed_options.strip(), re.MULTILINE
+            r"^([A-Z])\.\s*(.*)", self.perturbed_options.strip(), re.MULTILINE
         )
 
         # Get correct answer text
-        match = re.match(r"^([A-E])", self.expected_results.strip().upper())
+        match = re.match(r"^([A-Z])", self.expected_results.strip().upper())
         if not match:
             self.ran_pass = False
             return self.ran_pass
@@ -3434,11 +3459,11 @@ class ShuffleOptions(QASample):
         actual_text = self.actual_results.strip()
 
         # Check if actual_results is just a label (e.g., "C")
-        if re.match(r"^[A-E]$", actual_text):
+        if re.match(r"^[A-Z]$", actual_text):
             selected_label = actual_text
         # Check if actual_results starts with a label (e.g., "C. Text...")
-        elif re.match(r"^([A-E])\.", actual_text):
-            selected_label = re.match(r"^([A-E])\.", actual_text).group(1)
+        elif re.match(r"^([A-Z])\.", actual_text):
+            selected_label = re.match(r"^([A-Z])\.", actual_text).group(1)
         else:
             # If actual_results is the full text, find matching option
             selected_label = None
@@ -3529,6 +3554,135 @@ class ShuffleOptions(QASample):
             }
         )
         return result
+
+
+class SimplePrompt(BaseModel):
+    """
+    Simple prompt class to handle prompt and response.
+    """
+
+    prompt: Optional[str] = None
+    expected_results: Optional[str] = None
+    actual_results: Optional[str] = None
+    dataset_name: Optional[str] = None
+    task: Literal["question-answering"] = "question-answering"
+    category: Optional[str] = None
+    test_type: Optional[str] = None
+    state: Optional[str] = None
+    ran_pass: Optional[bool] = None
+    metric_name: Optional[str] = "llm_eval"
+    config: Optional[Union[str, dict]] = None
+    feedback: Optional[str] = None
+    threshold: Optional[int] = 0.5
+    __eval_model: Optional[str] = PrivateAttr(default=None)
+
+    def to_dict(self) -> Dict[str, Any]:
+        """
+        Converts the SimplePrompt object to a dictionary.
+
+        Returns:
+            Dict[str, Any]: A dictionary representation of the SimplePrompt object.
+        """
+        result = {
+            "category": self.category,
+            "test_type": self.test_type,
+            "prompt": self.prompt,
+        }
+
+        if self.expected_results is not None and self.actual_results is not None:
+            result.update(
+                {
+                    "expected_result": self.expected_results,
+                    "actual_result": self.actual_results,
+                    "feedback": self.feedback,
+                    "pass": self.is_pass(),
+                }
+            )
+
+        return result
+
+    def is_pass(self) -> bool:
+        """
+        Checks if the sample has passed the evaluation.
+
+        Returns:
+            bool: True if the sample passed the evaluation, False otherwise.
+        """
+        if self.ran_pass is not None:
+            return self.ran_pass
+
+        if self.feedback is None:
+            self.feedback = self.is_pass_eval()
+
+        if (self.feedback.get("rating", 0) or 0) >= self.threshold:
+            self.ran_pass = True
+            return True
+        elif self.feedback.get("metrics", {}):
+            # average of all metrics
+            total = sum(self.feedback.get("metrics", {}).values())
+            avg = round(total / len(self.feedback.get("metrics", {})), 2)
+            if avg >= self.threshold:
+                self.ran_pass = True
+                return True
+
+        return False
+
+    def is_pass_eval(self) -> bool:
+        """
+        Checks if the evaluation is valid.
+
+        Returns:
+            bool: True if the evaluation is valid, False otherwise.
+        """
+        if self.ran_pass is not None:
+            return self.ran_pass
+
+        if self.config is None:
+            from langtest.langtest import HARNESS_CONFIG as harness_config
+
+            self.config = harness_config
+
+        evaluation_model = self.config.get("evaluation", {}).get("model", None)
+        evaluation_hub = self.config.get("evaluation", {}).get("hub", None)
+        evalution_metric = self.config.get("evaluation", {}).get("metric", "llm_eval")
+
+        self.threshold = self.config.get("evaluation", {}).get("threshold", 0.5)
+        if self.threshold is None and evalution_metric == "llm_eval":
+            self.threshold = 5
+
+        if evalution_metric == "llm_eval":
+            from langtest.tasks import TaskManager
+
+            # model initialization
+            task = TaskManager("question-answering")
+
+            if evaluation_model and evaluation_hub:
+                self.__eval_model = task.model(
+                    evaluation_model,
+                    evaluation_hub,
+                    **self.config.get("model_parameters", {}),
+                )
+            else:
+                from langtest.langtest import EVAL_MODEL
+
+                self.__eval_model = EVAL_MODEL
+            # Evaluation logic
+            llm_eval = RatingEval(
+                llm=self.__eval_model,
+                eval_prompt=MENTAL_HEALTH_EVAL_PROMPT,
+                input_variables=["prompt", "response"],
+            )
+
+            results = llm_eval.evaluate(
+                inputs={
+                    "prompt": self.prompt,
+                },
+                predictions={
+                    "response": self.actual_results,
+                },
+            )
+            # self.feedback = results
+        return results
 
 
 Sample = TypeVar(

@@ -67,7 +67,12 @@ class ClinicalTestFactory(ITests):
             data_handler_copy = [sample.model_copy() for sample in self.data_handler]
             transformed_samples = test_func(data_handler_copy, **params)
 
-            if test_name in ("demographic-bias", "amega", "clinical_note_summary"):
+            if test_name in (
+                "demographic-bias",
+                "amega",
+                "clinical_note_summary",
+                "mental_health",
+            ):
                 all_samples.extend(transformed_samples)
             else:
                 new_transformed_samples, removed_samples_tests = filter_unique_samples(
@@ -1009,9 +1014,7 @@ class MedFuzz(BaseClinical):
                     confidence=ot["confidence_scores"],
                 )
 
-                # med_sample.perturbed_context = llm_attacker.generate_modified_question(
-                #     med_sample.original_question
-                # )
+                # generate the perturbed question
                 med_sample.perturbed_question = llm_attacker.generate_modified_question(
                     med_sample.original_question
                 )
@@ -1031,22 +1034,20 @@ class MedFuzz(BaseClinical):
 
     @staticmethod
     async def run(sample_list: List[Sample], model: ModelAPI, *args, **kwargs):
-        # return super().run(*args, **kwargs)
-        from langtest.transform.utils import TargetLLM
 
         progress_bar = kwargs.get("progress_bar", False)
 
         for sample in sample_list:
             if sample.state != "done":
-                target_llm = TargetLLM(model)
-
-                response = target_llm.process_user_text(sample.perturbed_question)
-
-                sample.actual_results = response.get("final_answer", "")
-
-                # del
-                del target_llm
-
+                original_text_input = build_qa_input(
+                    context=sample.original_context,
+                    question=sample.original_question,
+                    options=sample.options,
+                )
+                prompt = build_qa_prompt(
+                    original_text_input, "default_question_answering_prompt", **kwargs
+                )
+                sample.actual_results = model(original_text_input, prompt=prompt)
                 sample.state = "done"
 
             if progress_bar:
@@ -1110,7 +1111,7 @@ class ClinicalNoteSummary(BaseClinical):
 
         if dataset_path == "mts-dialog":
             dataset = ClinicalNoteSummary.mts_dialog()
-        elif dataset_path in ("aci-dialog", "aci_bench"):
+        elif dataset_path in ("aci-dialog", "aci_bench", "aci-bench"):
             dataset = ClinicalNoteSummary.aci_dialog()
         else:
             # based on file extension load the dataset using pandas
@@ -1227,3 +1228,75 @@ class ClinicalNoteSummary(BaseClinical):
                 "4. ASSESSMENT AND PLANn\n"
             )
             return CLINICALNOTE_SUMMARY_INSTRUCTIONS.format(sections_info=sections)
+
+
+class MentalHealth(BaseClinical):
+    """
+    MentalHealth class for the clinical tests
+    """
+
+    alias_name = "mental_health"
+    supported_tasks = ["question-answering", "text-generation"]
+
+    @staticmethod
+    def transform(sampe_list: List[Sample] = [], *args, **kwargs):
+        """Transform method for the MentalHealth class"""
+        from datasets import load_dataset
+        from langtest.utils.custom_types.sample import SimplePrompt
+        import random
+
+        random.seed(42)
+
+        sample_size = kwargs.get("sample_size", 50)
+        include_ground_truth = kwargs.get("include_ground_truth", True)
+
+        df = load_dataset("ShenLab/MentalChat16K", split="train").to_pandas()
+
+        transformed_samples = []
+
+        for each_row in df.sample(sample_size).to_dict(orient="records"):
+            sample = SimplePrompt()
+            sample.prompt = each_row["input"]
+            if include_ground_truth:
+                sample.expected_results = each_row["output"]
+
+            transformed_samples.append(sample)
+            sample.category = "clinical"
+            sample.test_type = "mental_health"
+
+        return transformed_samples
+
+    @staticmethod
+    async def run(sample_list: List[Sample], model: ModelAPI, *args, **kwargs):
+        """Run method for the MentalHealth class"""
+
+        progress_bar = kwargs.get("progress_bar", False)
+
+        model_type: Literal["chat", "completion"] = model.kwargs.get("model_type", "chat")
+
+        instructions = (
+            "You are a helpful mental health counselling assistant, "
+            "please answer the mental health questions based on the patient's description."
+            "The assistant gives helpful, comprehensive, and appropriate answers to the user's questions."
+        )
+
+        for sample in sample_list:
+            if sample.state != "done":
+                if model_type == "chat":
+                    messages = [
+                        {
+                            "role": "system",
+                            "content": instructions,
+                        },
+                        {"role": "user", "content": sample.prompt},
+                    ]
+                else:
+                    messages = f"## Instructions:\n{instructions}\n## Patient Query: \n{sample.prompt}"
+
+                sample.actual_results = model.model.invoke(messages).content
+                # sample.actual_results = model(original_text_input, prompt=prompt)
+                sample.state = "done"
+            if progress_bar:
+                progress_bar.update(1)
+
+        return sample_list
