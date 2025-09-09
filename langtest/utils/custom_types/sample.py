@@ -3289,17 +3289,27 @@ class DialogueToSummarySample(BaseModel):
             return self.ran_pass
 
         self.feedback = self._is_eval()
-        if self.feedback.get("Overall Quality", 0) >= self.threshold:
+        # Calculate overall quality if feedback contains numeric values
+        if isinstance(self.feedback, dict) and self.feedback:
+            numeric_values = [
+                v for v in self.feedback.values() if isinstance(v, (int, float))
+            ]
+            if numeric_values:
+                avg = sum(numeric_values) / len(numeric_values)
+                self.feedback["Overall Quality"] = avg
+
+        # Check if sample passes based on threshold
+        overall_quality = (
+            self.feedback.get("Overall Quality", 0)
+            if isinstance(self.feedback, dict)
+            else 0
+        )
+        if overall_quality >= self.threshold:
             self.ran_pass = True
-            return True
-        elif self.feedback.values() and any(
-            value >= self.threshold for value in self.feedback.values()
-        ):
-            self.ran_pass = True
-            return True
         else:
             self.ran_pass = False
-            return False
+
+        return self.ran_pass
 
     def _is_eval(self) -> Dict[str, float]:
         """
@@ -3341,7 +3351,7 @@ class DialogueToSummarySample(BaseModel):
             # Evaluation logic
             llm_eval = SummaryEval(
                 llm=self.__eval_model,
-                input_variables=["dialogue", "generated_summary"],
+                input_variables=["dialogue", "summary"],
             )
 
             results = llm_eval.evaluate(
@@ -3349,7 +3359,7 @@ class DialogueToSummarySample(BaseModel):
                     "dialogue": self.dialogue,
                 },
                 predictions={
-                    "generated_summary": self.actual_results,
+                    "summary": self.actual_results,
                 },
             )
         # rouge evaluation

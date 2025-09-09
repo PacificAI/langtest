@@ -1111,7 +1111,7 @@ class ClinicalNoteSummary(BaseClinical):
 
         if dataset_path == "mts-dialog":
             dataset = ClinicalNoteSummary.mts_dialog()
-        elif dataset_path in ("aci-dialog", "aci_bench"):
+        elif dataset_path in ("aci-dialog", "aci_bench", "aci-bench"):
             dataset = ClinicalNoteSummary.aci_dialog()
         else:
             # based on file extension load the dataset using pandas

@@ -261,20 +261,50 @@ class LlmEval:
 
 
 SUMMARY_EVAL_TEMPLATE = """
-Evaluate the clinical summary generated from the doctor-patient dialogue below.
+You are a clinical QA judge. Evaluate the **Generated Summary** against the **Dialogue** and score on a 1-10 integer scale. Do all reasoning silently and output **JSON only**.
 
-Instructions:
-1. Factual Completeness (1-10): Provide an integer rating.
-2. No Hallucinations (1-10): Provide an integer rating.
-3. Clinical Tone & Structure (1-10): Provide an integer rating.
-4. Overall Quality (1-10): Provide an integer rating.
+SCORING RUBRICS (1-10; integers only; clamp to [1,10]; if torn between two scores, choose the lower):
+1) Factual Completeness
+- 10: Includes all material facts present in the dialogue: chief complaint, history & pertinent negatives, meds/allergies, vitals/PE/test results (if any), assessment/impression, and plan/instructions.
+- 7-9: Minor non-critical omissions; all key facts present.
+- 4-6: Several important omissions or thin coverage of key sections.
+- 1-3: Misses most key facts; largely incomplete.
 
-Output a dict object with keys "Factual Completeness", "No Hallucinations", "Clinical Tone & Structure", and "Overall Quality" mapping to the integer ratings.
+2) No Hallucinations
+- 10: Every claim traceable to the dialogue; no invented diagnoses, vitals, meds, demographics, or timelines.
+- 7-9: One minor unsupported inference that doesn't alter clinical meaning.
+- 4-6: Multiple unsupported details or speculative statements.
+- 1-3: Significant fabricated/contradictory content (e.g., invented diagnoses/meds); unsafe leaps.
+
+3) Clinical Tone & Structure
+- 10: Clear, concise, neutral clinical tone; accurate terminology; organized (SOAP-like or equivalent); no emojis, marketing, or second-person coaching.
+- 7-9: Generally clinical with small style issues (minor verbosity/ordering).
+- 4-6: Mixed tone, informal language, or disorganized structure.
+- 1-3: Non-clinical tone, confusing, or unprofessional.
+
+4) Overall Quality
+- Compute as weighted average of the first three: 40% Factual Completeness, 40% No Hallucinations, 20% Clinical Tone & Structure. Round to nearest integer (0.5 rounds up), then clamp to [1,10].
+
+EVALUATION RULES
+- Compare strictly to the Dialogue. Penalize any PHI or specifics (age, dates, doses, findings) not supported by the dialogue.
+- Credit **pertinent negatives** only if explicitly stated or clearly implied in the dialogue.
+- Do not penalize for brevity if completeness is preserved.
+- If the summary is unrelated to the dialogue or empty, set all four scores to 1.
+- Ignore minor grammar/typos in the dialogue itself; focus on the summary's fidelity and clinical clarity.
+
+OUTPUT FORMAT (JSON only; no prose):
+{{
+  "Factual Completeness": <int 1-10>,
+  "No Hallucinations": <int 1-10>,
+  "Clinical Tone & Structure": <int 1-10>
+}}
 
 ### Dialogue
 {dialogue}
+
 ### Generated Summary
 {summary}
+
 """
 
 
