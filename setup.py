@@ -215,6 +215,8 @@ setup(
             "data/BSS/*",
             "data/resources/*",
             "data/DrugSwap/*",
+            "data/MTSDialog/*",
+            "data/ACIBench/*",
         ],
     },
     # Although 'package_data' is the preferred approach, in some case you may
