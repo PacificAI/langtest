@@ -23,7 +23,7 @@ jobs:
       - name: Free up disk space at start
         run: |
           sudo apt clean
-          sudo rm -rf /usr/share/dotnet /usr/local/lib/android /opt/ghc
+          sudo rm -rf /usr/share/dotnet /usr/local/lib/android /opt/ghc /home/runner/actions-runner/cached/
           df -h
 
       - uses: actions/checkout@v3
