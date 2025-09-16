@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://raw.githubusercontent.com/JohnSnowLabs/langtest/main/docs/assets/images/langtest/langtest_logo.png" alt="johnsnowlabs_logo" width="360" style="text-align:center;">
+  <img src="https://raw.githubusercontent.com/Pacific-AI-Corp/langtest/main/docs/assets/images/langtest/langtest_logo.png" alt="pacific_ai_logo" width="360" style="text-align:center;">
 </p>
 
 <div align="center">
