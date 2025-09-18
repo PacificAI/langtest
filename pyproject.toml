@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "langtest"
-version = "2.6.0"
+version = "2.7.0"
 description = "Pacific AI provides a library for delivering safe & effective NLP models."
 authors = ["Pacific AI <support@johnsnowlabs.com>"]
 readme = "README.md"
@@ -130,7 +130,7 @@ lint = "pflake8 langtest/"
 format = "black langtest/ tests/"
 check-docstrings = "pydocstyle langtest/ --add-select=D417 --add-ignore=D100,D104,D105,D400,D415 --convention=google"
 is-formatted = "black --check langtest/ tests/"
-force-cpu-torch = "echo $(java -version) && pip cache purge && echo $(df -h) && echo $(pip show torch)"
+force-cpu-torch = "pip cache purge"
 extra-lib = "python -m pip install openpyxl tables"
 
 

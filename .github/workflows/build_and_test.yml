@@ -24,6 +24,8 @@ jobs:
         run: |
           sudo apt clean
           sudo rm -rf /usr/share/dotnet /usr/local/lib/android /opt/ghc
+          sudo rm -rf "/usr/local/share/boost"
+          sudo rm -rf "$AGENT_TOOLSDIRECTORY"
           df -h
 
       - uses: actions/checkout@v3
@@ -50,8 +52,8 @@ jobs:
       - name: Install dependencies
         if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true'
         run: |
-          poetry cache clear pypi --all -n
-          poetry install --with dev --all-extras --no-cache
+          poetry cache clear pypi --all -n > /dev/null
+          poetry install --with dev --all-extras --no-cache --quiet --no-interaction
           source ./.venv/bin/activate && pip uninstall -y pyspark && rm -rf ./.venv/lib/python${{ matrix.python-version }}/site-packages/pyspark*/
           pip install pyspark==3.5.6
 

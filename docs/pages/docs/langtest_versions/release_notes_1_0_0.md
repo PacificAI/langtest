@@ -50,14 +50,14 @@ h.generate().run().report()
 * [LangTest: Documentation](https://langtest.org/docs/pages/docs/install)
 * [LangTest: Notebooks](https://langtest.org/docs/pages/tutorials/tutorials)
 * [LangTest: Test Types](https://langtest.org/docs/pages/tests/test)
-* [LangTest: GitHub Repo](https://github.com/JohnSnowLabs/langtest)
+* [LangTest: GitHub Repo](https://github.com/Pacific-AI-Corp/langtest)
 
 
 ## ❤️  Community support
 
 * [Slack](https://www.johnsnowlabs.com/slack-redirect/) For live discussion with the LangTest community, join the `#langtest` channel
-* [GitHub](https://github.com/JohnSnowLabs/langtest/tree/main) For bug reports, feature requests, and contributions
-* [Discussions](https://github.com/JohnSnowLabs/langtest/discussions) To engage with other community members, share ideas, and show off how you use NLP Test!
+* [GitHub](https://github.com/Pacific-AI-Corp/langtest/tree/main) For bug reports, feature requests, and contributions
+* [Discussions](https://github.com/Pacific-AI-Corp/langtest/discussions) To engage with other community members, share ideas, and show off how you use NLP Test!
 
 We would love to have you join the mission :point_right: open an issue, a PR, or give us some feedback on features you'd like to see! :raised_hands: 
 

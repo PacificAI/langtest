@@ -28,7 +28,7 @@ This test is specifically designed for Hugging Face fill-mask models like BERT, 
 
 ➤ How the test looks ?
 
-![image](https://github.com/JohnSnowLabs/langtest/assets/71844877/9cf21d36-88bb-4f69-b80e-63a74261669f)
+![image](https://github.com/Pacific-AI-Corp/langtest/assets/71844877/9cf21d36-88bb-4f69-b80e-63a74261669f)
 
 
 
@@ -41,7 +41,7 @@ The LegalSupport dataset evaluates fine-grained reverse entailment. Each sample 
 
 ➤ How the test looks ?
 
-![image](https://github.com/JohnSnowLabs/langtest/assets/23481244/277d22e8-a819-4fc4-9a5c-a04dd45d16f8)
+![image](https://github.com/Pacific-AI-Corp/langtest/assets/23481244/277d22e8-a819-4fc4-9a5c-a04dd45d16f8)
 
 
 ### Adding support for factuality test 
@@ -75,11 +75,11 @@ Accuracy is assessed by examining the "pass" column. If "pass" is marked as **Tr
 
 
 ➤ Notebook Link:
-- [Factuality Test](https://github.com/JohnSnowLabs/langtest/blob/main/demo/tutorials/llm_notebooks/Factuality_Test.ipynb)
+- [Factuality Test](https://github.com/Pacific-AI-Corp/langtest/blob/main/demo/tutorials/llm_notebooks/Factuality_Test.ipynb)
 
 ➤ How the test looks ?
 
-![image](https://github.com/JohnSnowLabs/langtest/assets/101416953/1ceed67b-62e6-4751-9d6a-0a666a12e2d7)
+![image](https://github.com/Pacific-AI-Corp/langtest/assets/101416953/1ceed67b-62e6-4751-9d6a-0a666a12e2d7)
 
 
 
@@ -108,7 +108,7 @@ By following these steps, we can gauge the model's sensitivity to negations and 
 
 We have used threshold of (-0.1,0.1) . If the eval_score falls within this threshold range, it indicates that the model is failing to properly handle negations, implying insensitivity to linguistic nuances introduced by negation words.
 
-![image](https://github.com/JohnSnowLabs/langtest/assets/71117423/11293d3d-7fe4-406d-b7d4-ec9a9f12df4d)
+![image](https://github.com/Pacific-AI-Corp/langtest/assets/71117423/11293d3d-7fe4-406d-b7d4-ec9a9f12df4d)
 
 
 ### Adding support for legal-summarization test
@@ -121,13 +121,13 @@ We have used threshold of (-0.1,0.1) . If the eval_score falls within this thres
 The Multi-LexSum dataset consists of legal case summaries. The aim is for the model to thoroughly examine the given context and, upon understanding its content, produce a concise summary that captures the essential themes and key details.
 
 ➤ Notebook Link:
-- [Legal Summarization](https://github.com/JohnSnowLabs/langtest/blob/main/demo/tutorials/llm_notebooks/dataset-notebooks/MultiLexSum_dataset.ipynb)
+- [Legal Summarization](https://github.com/Pacific-AI-Corp/langtest/blob/main/demo/tutorials/llm_notebooks/dataset-notebooks/MultiLexSum_dataset.ipynb)
 
 ➤ How the test looks ?
 
 The default threshold value is 0.50. If the eval_score is higher than threshold, then the "pass" will be as true.
 
-![image](https://github.com/JohnSnowLabs/langtest/assets/101416953/2a07f977-002c-43ce-be87-cf866d88eb92)
+![image](https://github.com/Pacific-AI-Corp/langtest/assets/101416953/2a07f977-002c-43ce-be87-cf866d88eb92)
 
 ## 🐛 Bug Fixes
 
