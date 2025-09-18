@@ -1,7 +1,7 @@
 ---
 layout: landing
 title: 'LangTest <span>Deliver Safe & Effective Language Models</span>'
-excerpt: <br> 60+ Test Types for Comparing LLM & NLP Models on Accuracy, Bias, Fairness, Robustness & More
+excerpt: <br> 100+ Test Types for Comparing LLM & NLP Models on Accuracy, Bias, Fairness, Robustness & More
 permalink: /
 header: true
 article_header:
@@ -48,7 +48,7 @@ data:
       - title:
         image:
           src: assets/images/home/jsl_logo.svg
-          url: https://pacific.ai/
+          url: https://www.johnsnowlabs.com/
       - title:
         image:
           src: assets/images/home/hf-logo-with-title.svg 
