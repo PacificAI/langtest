@@ -86,7 +86,7 @@ The integration of [LM Studio](https://lmstudio.ai/)  with LangTest enables offl
 
 Simply integrate LM Studio with LangTest to unlock offline utilization of Hugging Face quantized models for your NLP testing needs., below is the demo video for help.
 
-https://github.com/JohnSnowLabs/langtest/assets/101416953/d1f288d4-1d96-4d9c-9db2-4f87a9e69019
+https://github.com/Pacific-AI-Corp/langtest/assets/101416953/d1f288d4-1d96-4d9c-9db2-4f87a9e69019
 
 ### 🚀Text Embedding Benchmark Pipelines with CLI (LangTest + LlamaIndex)
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Pacific-AI-Corp/langtest/blob/main/demo/tutorials/benchmarks/Benchmarking_Embeddings(Llama_Index%2BLangtest).ipynb)
@@ -240,29 +240,29 @@ harness.generate().run().report()
 
 ## What's Changed
 
-* Fix accuracy and bugs by @Prikshit7766 in https://github.com/JohnSnowLabs/langtest/pull/945
-* Lm studio by @Prikshit7766 in https://github.com/JohnSnowLabs/langtest/pull/955
-* Remove unused variable and update reference to global_service_context by @chakravarthik27 in https://github.com/JohnSnowLabs/langtest/pull/956
-* Display model response for accuracy by @Prikshit7766 in https://github.com/JohnSnowLabs/langtest/pull/958
-* Update display import with try_import_lib by @chakravarthik27 in https://github.com/JohnSnowLabs/langtest/pull/961
-* Feature/run embedding benchmark pipelines CLI by @ArshaanNazir in https://github.com/JohnSnowLabs/langtest/pull/960
-* Fix llm eval for transformers and lm studio and Code Refactoring by @Prikshit7766 in https://github.com/JohnSnowLabs/langtest/pull/963
-* Feature/add feature to compare models on different benchmark datasets by @chakravarthik27 in https://github.com/JohnSnowLabs/langtest/pull/964
-* Fix/religion bias space issue by @Prikshit7766 in https://github.com/JohnSnowLabs/langtest/pull/966
-* Fixes by @RakshitKhajuria in https://github.com/JohnSnowLabs/langtest/pull/967
-* Renaming sub task by @Prikshit7766 in https://github.com/JohnSnowLabs/langtest/pull/970
-* Fixes/cli issues by @chakravarthik27 in https://github.com/JohnSnowLabs/langtest/pull/972
-* website updates by @ArshaanNazir in https://github.com/JohnSnowLabs/langtest/pull/962
-* Feature/Updated_toxicity_Test by @ArshaanNazir in https://github.com/JohnSnowLabs/langtest/pull/979
-* Fix/datasets by @ArshaanNazir in https://github.com/JohnSnowLabs/langtest/pull/975
-* Fix: CSVDataset and HuggingFaceDataset class by @Prikshit7766 in https://github.com/JohnSnowLabs/langtest/pull/976
-* Llm eval in fairness by @Prikshit7766 in https://github.com/JohnSnowLabs/langtest/pull/974
-* Enhancement/sycophancy math by @RakshitKhajuria in https://github.com/JohnSnowLabs/langtest/pull/977
-* Update dependencies in setup.py and pyproject.toml by @chakravarthik27 in https://github.com/JohnSnowLabs/langtest/pull/981
-* Chore/final website updates by @ArshaanNazir in https://github.com/JohnSnowLabs/langtest/pull/980
-* Release/2.0.0 by @ArshaanNazir in https://github.com/JohnSnowLabs/langtest/pull/983
+* Fix accuracy and bugs by @Prikshit7766 in https://github.com/Pacific-AI-Corp/langtest/pull/945
+* Lm studio by @Prikshit7766 in https://github.com/Pacific-AI-Corp/langtest/pull/955
+* Remove unused variable and update reference to global_service_context by @chakravarthik27 in https://github.com/Pacific-AI-Corp/langtest/pull/956
+* Display model response for accuracy by @Prikshit7766 in https://github.com/Pacific-AI-Corp/langtest/pull/958
+* Update display import with try_import_lib by @chakravarthik27 in https://github.com/Pacific-AI-Corp/langtest/pull/961
+* Feature/run embedding benchmark pipelines CLI by @ArshaanNazir in https://github.com/Pacific-AI-Corp/langtest/pull/960
+* Fix llm eval for transformers and lm studio and Code Refactoring by @Prikshit7766 in https://github.com/Pacific-AI-Corp/langtest/pull/963
+* Feature/add feature to compare models on different benchmark datasets by @chakravarthik27 in https://github.com/Pacific-AI-Corp/langtest/pull/964
+* Fix/religion bias space issue by @Prikshit7766 in https://github.com/Pacific-AI-Corp/langtest/pull/966
+* Fixes by @RakshitKhajuria in https://github.com/Pacific-AI-Corp/langtest/pull/967
+* Renaming sub task by @Prikshit7766 in https://github.com/Pacific-AI-Corp/langtest/pull/970
+* Fixes/cli issues by @chakravarthik27 in https://github.com/Pacific-AI-Corp/langtest/pull/972
+* website updates by @ArshaanNazir in https://github.com/Pacific-AI-Corp/langtest/pull/962
+* Feature/Updated_toxicity_Test by @ArshaanNazir in https://github.com/Pacific-AI-Corp/langtest/pull/979
+* Fix/datasets by @ArshaanNazir in https://github.com/Pacific-AI-Corp/langtest/pull/975
+* Fix: CSVDataset and HuggingFaceDataset class by @Prikshit7766 in https://github.com/Pacific-AI-Corp/langtest/pull/976
+* Llm eval in fairness by @Prikshit7766 in https://github.com/Pacific-AI-Corp/langtest/pull/974
+* Enhancement/sycophancy math by @RakshitKhajuria in https://github.com/Pacific-AI-Corp/langtest/pull/977
+* Update dependencies in setup.py and pyproject.toml by @chakravarthik27 in https://github.com/Pacific-AI-Corp/langtest/pull/981
+* Chore/final website updates by @ArshaanNazir in https://github.com/Pacific-AI-Corp/langtest/pull/980
+* Release/2.0.0 by @ArshaanNazir in https://github.com/Pacific-AI-Corp/langtest/pull/983
 
 
-**Full Changelog**: https://github.com/JohnSnowLabs/langtest/compare/1.10.0...2.0.0
+**Full Changelog**: https://github.com/Pacific-AI-Corp/langtest/compare/1.10.0...2.0.0
 </div>
 {%- include docs-langtest-pagination.html -%}

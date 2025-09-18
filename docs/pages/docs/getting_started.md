@@ -39,7 +39,7 @@ LangTest, an open-source Python library, addresses this by automatically generat
   Show your support by giving us a star on GitHub, it's the fuel that keeps our journey of innovation and progress in motion.
 
   {:.btn-block}
-  [⭐ Star on GitHub](https://github.com/JohnSnowLabs/langtest){:.button.button--info.button--rounded.button--md}
+  [⭐ Star on GitHub](https://github.com/Pacific-AI-Corp/langtest){:.button.button--info.button--rounded.button--md}
 
   </div>
   <div class="block-box" markdown="1">

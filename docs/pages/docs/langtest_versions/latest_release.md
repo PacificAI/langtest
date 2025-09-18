@@ -490,32 +490,32 @@ The website has been updated to feature new content emphasizing Databricks integ
 
 
 ## What's Changed
-* Websites Changes in v2.1.0 by @chakravarthik27 in https://github.com/JohnSnowLabs/langtest/pull/1006
-* updates web pages by @chakravarthik27 in https://github.com/JohnSnowLabs/langtest/pull/1032
-* adding workflow for github pages by @chakravarthik27 in https://github.com/JohnSnowLabs/langtest/pull/1051
-* websites updates  with fixes by @chakravarthik27 in https://github.com/JohnSnowLabs/langtest/pull/1079
-* Website Updates for 2.4.0 by @chakravarthik27 in https://github.com/JohnSnowLabs/langtest/pull/1126
-* Fix/basic setup within datrabricks using azure openai by @chakravarthik27 in https://github.com/JohnSnowLabs/langtest/pull/1128
-* Feature/implement accuracy drop tests on robustness and bias by @chakravarthik27 in https://github.com/JohnSnowLabs/langtest/pull/1129
-* Feature/add support for chat and instruct model types by @chakravarthik27 in https://github.com/JohnSnowLabs/langtest/pull/1131
-* updated: model_kwargs handling for evaluation model by @chakravarthik27 in https://github.com/JohnSnowLabs/langtest/pull/1133
-* updated: acclerate and spacy packages by @chakravarthik27 in https://github.com/JohnSnowLabs/langtest/pull/1135
-* Feature/enhance harness report to include detailed score counts and grouped results by @chakravarthik27 in https://github.com/JohnSnowLabs/langtest/pull/1132
-* Feature/random masking on images tests by @chakravarthik27 in https://github.com/JohnSnowLabs/langtest/pull/1138
-* Unit testing/add new unit tests to enhance test coverage and reliability by @chakravarthik27 in https://github.com/JohnSnowLabs/langtest/pull/1140
-* added new overlay classes for enhanced image robustness by @chakravarthik27 in https://github.com/JohnSnowLabs/langtest/pull/1141
-* Annotations/improve the type annotation for config by @chakravarthik27 in https://github.com/JohnSnowLabs/langtest/pull/1143
-* fix: enhance model loading logic and update dependencies for by @chakravarthik27 in https://github.com/JohnSnowLabs/langtest/pull/1145
-* fix: improve model_report function to handle numeric values and initi… by @chakravarthik27 in https://github.com/JohnSnowLabs/langtest/pull/1146
-* Feature/support for loading datasets from dlt within databricks by @chakravarthik27 in https://github.com/JohnSnowLabs/langtest/pull/1148
-* feat: update dependency version constraints in pyproject.toml  by @chakravarthik27 in https://github.com/JohnSnowLabs/langtest/pull/1149
-* feat: enhance DegradationAnalysis to support question-answering task by @chakravarthik27 in https://github.com/JohnSnowLabs/langtest/pull/1153
-* Chore/final website updates for 2.5.0 by @chakravarthik27 in https://github.com/JohnSnowLabs/langtest/pull/1150
-* Chore/final website updates by @chakravarthik27 in https://github.com/JohnSnowLabs/langtest/pull/1155
-* Release/2.5.0 by @chakravarthik27 in https://github.com/JohnSnowLabs/langtest/pull/1144
+* Websites Changes in v2.1.0 by @chakravarthik27 in https://github.com/Pacific-AI-Corp/langtest/pull/1006
+* updates web pages by @chakravarthik27 in https://github.com/Pacific-AI-Corp/langtest/pull/1032
+* adding workflow for github pages by @chakravarthik27 in https://github.com/Pacific-AI-Corp/langtest/pull/1051
+* websites updates  with fixes by @chakravarthik27 in https://github.com/Pacific-AI-Corp/langtest/pull/1079
+* Website Updates for 2.4.0 by @chakravarthik27 in https://github.com/Pacific-AI-Corp/langtest/pull/1126
+* Fix/basic setup within datrabricks using azure openai by @chakravarthik27 in https://github.com/Pacific-AI-Corp/langtest/pull/1128
+* Feature/implement accuracy drop tests on robustness and bias by @chakravarthik27 in https://github.com/Pacific-AI-Corp/langtest/pull/1129
+* Feature/add support for chat and instruct model types by @chakravarthik27 in https://github.com/Pacific-AI-Corp/langtest/pull/1131
+* updated: model_kwargs handling for evaluation model by @chakravarthik27 in https://github.com/Pacific-AI-Corp/langtest/pull/1133
+* updated: acclerate and spacy packages by @chakravarthik27 in https://github.com/Pacific-AI-Corp/langtest/pull/1135
+* Feature/enhance harness report to include detailed score counts and grouped results by @chakravarthik27 in https://github.com/Pacific-AI-Corp/langtest/pull/1132
+* Feature/random masking on images tests by @chakravarthik27 in https://github.com/Pacific-AI-Corp/langtest/pull/1138
+* Unit testing/add new unit tests to enhance test coverage and reliability by @chakravarthik27 in https://github.com/Pacific-AI-Corp/langtest/pull/1140
+* added new overlay classes for enhanced image robustness by @chakravarthik27 in https://github.com/Pacific-AI-Corp/langtest/pull/1141
+* Annotations/improve the type annotation for config by @chakravarthik27 in https://github.com/Pacific-AI-Corp/langtest/pull/1143
+* fix: enhance model loading logic and update dependencies for by @chakravarthik27 in https://github.com/Pacific-AI-Corp/langtest/pull/1145
+* fix: improve model_report function to handle numeric values and initi… by @chakravarthik27 in https://github.com/Pacific-AI-Corp/langtest/pull/1146
+* Feature/support for loading datasets from dlt within databricks by @chakravarthik27 in https://github.com/Pacific-AI-Corp/langtest/pull/1148
+* feat: update dependency version constraints in pyproject.toml  by @chakravarthik27 in https://github.com/Pacific-AI-Corp/langtest/pull/1149
+* feat: enhance DegradationAnalysis to support question-answering task by @chakravarthik27 in https://github.com/Pacific-AI-Corp/langtest/pull/1153
+* Chore/final website updates for 2.5.0 by @chakravarthik27 in https://github.com/Pacific-AI-Corp/langtest/pull/1150
+* Chore/final website updates by @chakravarthik27 in https://github.com/Pacific-AI-Corp/langtest/pull/1155
+* Release/2.5.0 by @chakravarthik27 in https://github.com/Pacific-AI-Corp/langtest/pull/1144
 
 
-**Full Changelog**: https://github.com/JohnSnowLabs/langtest/compare/2.4.0...2.5.0
+**Full Changelog**: https://github.com/Pacific-AI-Corp/langtest/compare/2.4.0...2.5.0
 
 </div>
 {%- include docs-langtest-pagination.html -%}

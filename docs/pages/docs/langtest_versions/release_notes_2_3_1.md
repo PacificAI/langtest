@@ -42,26 +42,26 @@ In this patch version, we've resolved several critical issues to enhance the fun
    - Add JSON Output for NER Sample to Support Generative AI Lab [#1099][#1100]
 
 ## What's Changed
-* chore: reapply transformations to NER task after importing test cases by @chakravarthik27 in https://github.com/JohnSnowLabs/langtest/pull/1076
-* updated the python api documentation with sphinx by @chakravarthik27 in https://github.com/JohnSnowLabs/langtest/pull/1077
-* Patch/2.3.1 by @chakravarthik27 in https://github.com/JohnSnowLabs/langtest/pull/1078
-* Bug/ner evaluation fix in is_pass() by @chakravarthik27 in https://github.com/JohnSnowLabs/langtest/pull/1080
-* resolved: recovering the transformation object. by @chakravarthik27 in https://github.com/JohnSnowLabs/langtest/pull/1081
-* fixed: consistent issues in augmentation by @chakravarthik27 in https://github.com/JohnSnowLabs/langtest/pull/1085
-* Chore: Add Option to Configure Number of Generated Templates in Templatic Augmentation by @chakravarthik27 in https://github.com/JohnSnowLabs/langtest/pull/1089
-* resolved/augmentation errors  by @chakravarthik27 in https://github.com/JohnSnowLabs/langtest/pull/1090
-* Fix/augmentations by @chakravarthik27 in https://github.com/JohnSnowLabs/langtest/pull/1091
-* Feature/add support for the multi label classification model by @chakravarthik27 in https://github.com/JohnSnowLabs/langtest/pull/1096
-* Patch/2.3.1 by @chakravarthik27 in https://github.com/JohnSnowLabs/langtest/pull/1097
-* chore: update pyproject.toml version to 2.3.1 by @chakravarthik27 in https://github.com/JohnSnowLabs/langtest/pull/1098
-* chore: update DataAugmenter to support generating JSON output in GEN AI LAB by @chakravarthik27 in https://github.com/JohnSnowLabs/langtest/pull/1100
-* Patch/2.3.1 by @chakravarthik27 in https://github.com/JohnSnowLabs/langtest/pull/1101
-* implemented: basic version to handling document wise. by @chakravarthik27 in https://github.com/JohnSnowLabs/langtest/pull/1094
-* Fix/module error with openai package by @chakravarthik27 in https://github.com/JohnSnowLabs/langtest/pull/1102
-* Patch/2.3.1 by @chakravarthik27 in https://github.com/JohnSnowLabs/langtest/pull/1103
+* chore: reapply transformations to NER task after importing test cases by @chakravarthik27 in https://github.com/Pacific-AI-Corp/langtest/pull/1076
+* updated the python api documentation with sphinx by @chakravarthik27 in https://github.com/Pacific-AI-Corp/langtest/pull/1077
+* Patch/2.3.1 by @chakravarthik27 in https://github.com/Pacific-AI-Corp/langtest/pull/1078
+* Bug/ner evaluation fix in is_pass() by @chakravarthik27 in https://github.com/Pacific-AI-Corp/langtest/pull/1080
+* resolved: recovering the transformation object. by @chakravarthik27 in https://github.com/Pacific-AI-Corp/langtest/pull/1081
+* fixed: consistent issues in augmentation by @chakravarthik27 in https://github.com/Pacific-AI-Corp/langtest/pull/1085
+* Chore: Add Option to Configure Number of Generated Templates in Templatic Augmentation by @chakravarthik27 in https://github.com/Pacific-AI-Corp/langtest/pull/1089
+* resolved/augmentation errors  by @chakravarthik27 in https://github.com/Pacific-AI-Corp/langtest/pull/1090
+* Fix/augmentations by @chakravarthik27 in https://github.com/Pacific-AI-Corp/langtest/pull/1091
+* Feature/add support for the multi label classification model by @chakravarthik27 in https://github.com/Pacific-AI-Corp/langtest/pull/1096
+* Patch/2.3.1 by @chakravarthik27 in https://github.com/Pacific-AI-Corp/langtest/pull/1097
+* chore: update pyproject.toml version to 2.3.1 by @chakravarthik27 in https://github.com/Pacific-AI-Corp/langtest/pull/1098
+* chore: update DataAugmenter to support generating JSON output in GEN AI LAB by @chakravarthik27 in https://github.com/Pacific-AI-Corp/langtest/pull/1100
+* Patch/2.3.1 by @chakravarthik27 in https://github.com/Pacific-AI-Corp/langtest/pull/1101
+* implemented: basic version to handling document wise. by @chakravarthik27 in https://github.com/Pacific-AI-Corp/langtest/pull/1094
+* Fix/module error with openai package by @chakravarthik27 in https://github.com/Pacific-AI-Corp/langtest/pull/1102
+* Patch/2.3.1 by @chakravarthik27 in https://github.com/Pacific-AI-Corp/langtest/pull/1103
 
 
-**Full Changelog**: https://github.com/JohnSnowLabs/langtest/compare/2.3.0...2.3.1
+**Full Changelog**: https://github.com/Pacific-AI-Corp/langtest/compare/2.3.0...2.3.1
 
 </div>
 {%- include docs-langtest-pagination.html -%}

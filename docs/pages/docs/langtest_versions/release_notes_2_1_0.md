@@ -101,7 +101,7 @@ harness = Harness(
 # Generate, Run and get Report
 harness.generate().run().report()
 ```
-![image](https://github.com/JohnSnowLabs/langtest/assets/23481244/9754c506-e715-4e2c-8b9d-dfd98f0695e5)
+![image](https://github.com/Pacific-AI-Corp/langtest/assets/23481244/9754c506-e715-4e2c-8b9d-dfd98f0695e5)
 
 
 ### 📂 Streamlined Data Handling and Evaluation
@@ -183,7 +183,7 @@ harness.generate() generates testcases, .run() executes them, and .report() comp
 ```python
 harness.generate().run().report()
 ```
-![image](https://github.com/JohnSnowLabs/langtest/assets/23481244/0d48be2f-e5bc-4971-b0a1-2756a10d3f24)
+![image](https://github.com/Pacific-AI-Corp/langtest/assets/23481244/0d48be2f-e5bc-4971-b0a1-2756a10d3f24)
 
 ### 🖥️ Streamlined Evaluation Workflows with Enhanced CLI Commands
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Pacific-AI-Corp/langtest/blob/main/demo/tutorials/benchmarks/Langtest_Cli_Eval_Command.ipynb)
@@ -272,7 +272,7 @@ langtest eval --model <your model name or endpoint> \
               -c < your configuration file like parameter.json or parameter.yaml>
 ```
 Finally, we can know the leaderboard and rank of the model.
-![image](https://github.com/JohnSnowLabs/langtest/assets/23481244/a405d0c6-5ef1-4efb-924c-0ba8667ebe43)
+![image](https://github.com/Pacific-AI-Corp/langtest/assets/23481244/a405d0c6-5ef1-4efb-924c-0ba8667ebe43)
 
 ----
 
@@ -280,7 +280,7 @@ To visualize the leaderboard anytime using the CLI command
 ```bash
 langtest show-leaderboard
 ```
-![image](https://github.com/JohnSnowLabs/langtest/assets/23481244/f357c173-e4b1-4dc8-86ad-98438046b89c)
+![image](https://github.com/Pacific-AI-Corp/langtest/assets/23481244/f357c173-e4b1-4dc8-86ad-98438046b89c)
 
 ## 📒 New Notebooks
 
@@ -306,21 +306,21 @@ langtest show-leaderboard
 
 ## What's Changed
 
-* Feautre/integration with web api by @chakravarthik27 in https://github.com/JohnSnowLabs/langtest/pull/986
-* Refactor TestFactory class to handle exceptions in async tests by @chakravarthik27 in https://github.com/JohnSnowLabs/langtest/pull/990
-* data augmentation support for question-answering task by @chakravarthik27 in https://github.com/JohnSnowLabs/langtest/pull/991
-* Updated dependencies by @chakravarthik27 in https://github.com/JohnSnowLabs/langtest/pull/992
-* Fix/implement the multiple dataset support for accuracy tests by @chakravarthik27 in https://github.com/JohnSnowLabs/langtest/pull/998
-* Feature/add support for other file formats by @chakravarthik27 in https://github.com/JohnSnowLabs/langtest/pull/993
-* Bug Fix: Generated results are none by @chakravarthik27 in https://github.com/JohnSnowLabs/langtest/pull/1000
-* Feature/implement load & save for benchmark reports by @chakravarthik27 in https://github.com/JohnSnowLabs/langtest/pull/999
-* Fix/bug fixes langtest 2 1 0 rc1 by @chakravarthik27 in https://github.com/JohnSnowLabs/langtest/pull/1003
-* website updates by @chakravarthik27 in https://github.com/JohnSnowLabs/langtest/pull/1001
-* Fix/bug fixes langtest 2 1 0 rc1 by @chakravarthik27 in https://github.com/JohnSnowLabs/langtest/pull/1004
-* Release/2.0.1 by @chakravarthik27 in https://github.com/JohnSnowLabs/langtest/pull/1005
+* Feautre/integration with web api by @chakravarthik27 in https://github.com/Pacific-AI-Corp/langtest/pull/986
+* Refactor TestFactory class to handle exceptions in async tests by @chakravarthik27 in https://github.com/Pacific-AI-Corp/langtest/pull/990
+* data augmentation support for question-answering task by @chakravarthik27 in https://github.com/Pacific-AI-Corp/langtest/pull/991
+* Updated dependencies by @chakravarthik27 in https://github.com/Pacific-AI-Corp/langtest/pull/992
+* Fix/implement the multiple dataset support for accuracy tests by @chakravarthik27 in https://github.com/Pacific-AI-Corp/langtest/pull/998
+* Feature/add support for other file formats by @chakravarthik27 in https://github.com/Pacific-AI-Corp/langtest/pull/993
+* Bug Fix: Generated results are none by @chakravarthik27 in https://github.com/Pacific-AI-Corp/langtest/pull/1000
+* Feature/implement load & save for benchmark reports by @chakravarthik27 in https://github.com/Pacific-AI-Corp/langtest/pull/999
+* Fix/bug fixes langtest 2 1 0 rc1 by @chakravarthik27 in https://github.com/Pacific-AI-Corp/langtest/pull/1003
+* website updates by @chakravarthik27 in https://github.com/Pacific-AI-Corp/langtest/pull/1001
+* Fix/bug fixes langtest 2 1 0 rc1 by @chakravarthik27 in https://github.com/Pacific-AI-Corp/langtest/pull/1004
+* Release/2.0.1 by @chakravarthik27 in https://github.com/Pacific-AI-Corp/langtest/pull/1005
 
 
-**Full Changelog**: https://github.com/JohnSnowLabs/langtest/compare/2.0.0...2.1.0
+**Full Changelog**: https://github.com/Pacific-AI-Corp/langtest/compare/2.0.0...2.1.0
 
 ## ⚒️ Previous Versions
 </div>
