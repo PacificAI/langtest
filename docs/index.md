@@ -48,7 +48,7 @@ data:
       - title:
         image:
           src: assets/images/home/jsl_logo.svg
-          url: https://www.johnsnowlabs.com/
+          url: https://pacific.ai/
       - title:
         image:
           src: assets/images/home/hf-logo-with-title.svg 

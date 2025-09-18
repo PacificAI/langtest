@@ -49,7 +49,7 @@ LangTest, an open-source Python library, addresses this by automatically generat
   If you thrive on interactive education, our blogs are your gateway to immersive knowledge.
 
   {:.btn-block}
-  [📃 Blogs](https://www.johnsnowlabs.com/responsible-ai-blog/){:.button.button--info.button--rounded.button--md}
+  [📃 Blogs](https://pacific.ai/healthcare-ai-governace-library/){:.button.button--info.button--rounded.button--md}
 
   </div>
 </div>
