@@ -204,3 +204,4 @@ src/*/resources/*.classes
 
 _site/
 mlruns
+.venv_doc/
