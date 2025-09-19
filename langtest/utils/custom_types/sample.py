@@ -1,14 +1,29 @@
 import re
 import string
 import importlib
-from typing import Any, Dict, List, Mapping, Optional, Tuple, TypeVar, Union, Callable
+from typing import (
+    Any,
+    ClassVar,
+    Dict,
+    List,
+    Literal,
+    Mapping,
+    Optional,
+    Tuple,
+    TypeVar,
+    Union,
+    Callable,
+)
 from copy import deepcopy
+from PIL.Image import Image
 
+from langtest.metrics.eval_prompts import MENTAL_HEALTH_EVAL_PROMPT
+from langtest.metrics.llm_eval import RatingEval
 from langtest.modelhandler.modelhandler import ModelAPI
 from ...errors import Errors
-from pydantic.v1 import BaseModel, PrivateAttr, validator, Field
+from pydantic import BaseModel, ConfigDict, PrivateAttr, Field, field_validator
 from pydantic import BaseModel as BaseModelV2
-from .helpers import Transformation, Span
+from .helpers import Transformation, Span, build_qa_input, build_qa_prompt
 from .helpers import default_user_prompt
 from ...metrics import EmbeddingDistance
 from .output import MaxScoreOutput, NEROutput, Result
@@ -27,16 +42,16 @@ class BaseSample(BaseModel):
     operator and add the new model to the `Result` type variable.
     """
 
-    original: str = None
-    test_type: str = None
-    test_case: str = None
-    expected_results: Result = None
-    actual_results: Result = None
-    transformations: List[Transformation] = None
-    category: str = None
-    state: str = None
-    threshold: float = None
-    dataset_name: str = None
+    original: Optional[str] = None
+    test_type: Optional[str] = None
+    test_case: Optional[Union[str, int, float]] = None
+    expected_results: Optional[Result] = None
+    actual_results: Optional[Result] = None
+    transformations: Optional[List[Transformation]] = None
+    category: Optional[str] = None
+    state: Optional[str] = None
+    threshold: Optional[float] = None
+    dataset_name: Optional[str] = None
 
     def __init__(self, **data):
         """Constructor method"""
@@ -82,15 +97,17 @@ class BaseSample(BaseModel):
             result.update(
                 {
                     "transformations": [
-                        transformation.dict() for transformation in self.transformations
+                        transformation.model_dump()
+                        for transformation in self.transformations
                     ]
                 }
             )
 
         return result
 
-    @validator("transformations")
-    def sort_transformations(cls, v):
+    @field_validator("transformations")
+    @classmethod
+    def sort_transformations(cls, v, info):
         """Validator ensuring that transformations are in correct order"""
         return sorted(v, key=lambda x: x.original_span.start)
 
@@ -135,7 +152,8 @@ class NERSample(BaseSample):
     """Helper object for named entity recognition tasks"""
 
     # TODO: remove _realigned_spans, but for now it ensures that we don't realign spans multiple times
-    task: str = Field(default="ner", const=True)
+    # task: str = Field(default="ner", forzen=True)
+    task: Literal["ner"] = "ner"
     _realigned_spans: Optional[Result] = PrivateAttr(default_factory=None)
 
     def __init__(self, **data):
@@ -329,7 +347,7 @@ class SequenceClassificationSample(BaseSample):
     """
 
     gender: str = None
-    task: str = Field(default="text-classification", constr=True)
+    task: Literal["text-classification"] = "text-classification"
 
     def __init__(self, **data):
         """Constructor method"""
@@ -389,25 +407,26 @@ class BaseQASample(BaseModel):
 
     original_question: str
     original_context: str
-    options: str = None
-    test_type: str = None
-    perturbed_question: str = None
-    perturbed_context: str = None
-    expected_results: Result = None
-    actual_results: Result = None
-    dataset_name: str = None
-    category: str = None
-    state: str = None
-    task: str = Field(default="question-answering", const=True)
-    test_case: str = None
-    config: Mapping[str, Mapping] = None
-    distance_result: float = None
-    eval_model: Union[str, tuple] = None
-    ran_pass: bool = None
-    metric_name: str = None
-    gender: str = None
-    loaded_fields: Dict[str, Any] = None
-    feedback: str = None
+    options: Optional[str] = None
+    test_type: Optional[str] = None
+    perturbed_question: Optional[str] = None
+    perturbed_context: Optional[str] = None
+    expected_results: Optional[Result] = None
+    actual_results: Optional[Result] = None
+    dataset_name: Optional[str] = None
+    category: Optional[str] = None
+    state: Optional[str] = None
+    # task: str = Field(default="question-answering", frozen=True)
+    task: Literal["question-answering"] = "question-answering"
+    test_case: Optional[str] = None
+    config: Optional[Mapping[str, Mapping]] = None
+    distance_result: Optional[float] = None
+    eval_model: Optional[Union[str, tuple]] = None
+    ran_pass: Optional[bool] = None
+    metric_name: Optional[str] = None
+    gender: Optional[str] = None
+    loaded_fields: Optional[Dict[str, Any]] = None
+    feedback: Optional[str] = None
 
     def __init__(self, **data):
         """Constructor method"""
@@ -431,7 +450,7 @@ class BaseQASample(BaseModel):
             sens = [self.original_question, self.original_context]
 
             self.perturbed_question, self.perturbed_context = func(
-                sens, prob, **params, **kwargs
+                sens, prob=prob, **params, **kwargs
             )
 
             self.category = func.__module__.split(".")[-1]
@@ -750,7 +769,8 @@ class SummarizationSample(BaseModel):
     actual_results: str = None
     state: str = None
     dataset_name: str = None
-    task: str = Field(default="summarization", constr=True)
+    # task: str = Field(default="summarization", frozen=True)
+    task: Literal["summarization"] = "summarization"
     category: str = None
     test_type: str = None
     ran_pass: tuple = None
@@ -900,7 +920,8 @@ class ToxicitySample(BaseModel):
     completion_toxicity: str = None
     state: str = None
     dataset_name: str = None  # RealToxicityPrompts
-    task: str = Field(default="toxicity", constr=True)
+    # task: str = Field(default="toxicity", frozen=True)
+    task: Literal["toxicity"] = "toxicity"
     category: str = None  # toxicity
     test_type: str = None  # offensive
 
@@ -1044,7 +1065,8 @@ class TranslationSample(BaseModel):
     actual_results: Result = None
     state: str = None
     dataset_name: str = None
-    task: str = Field(default="translation", const=True)
+    # task: str = Field(default="translation", frozen=True)
+    task: Literal["translation"] = "translation"
     category: str = None
     test_type: str = None
     ran_pass: tuple = None
@@ -1153,7 +1175,8 @@ class SecuritySample(BaseModel):
     actual_results: str = None
     state: str = None
     dataset_name: str = None
-    task: str = Field(default="security", const=True)
+    # task: str = Field(default="security", frozen=True)
+    task: Literal["security"] = "security"
     category: str = None  # security
     test_type: str = None  # prompt_injection_attack
 
@@ -1426,7 +1449,7 @@ class DisinformationSample(BaseModel):
     task: str = None
     category: str = None
     test_type: str = None
-    model_response: str = None
+    generated_response: str = None
     ran_pass: tuple = None
 
     def __init__(self, **data):
@@ -1440,13 +1463,13 @@ class DisinformationSample(BaseModel):
             "test_type": self.test_type,
         }
 
-        if self.model_response is not None:
+        if self.generated_response is not None:
             bool_pass, eval_score = self._is_eval()
             result.update(
                 {
                     "hypothesis": self.hypothesis,
                     "statements": self.statements,
-                    "model_response": self.model_response,
+                    "model_response": self.generated_response,
                     "eval_score": eval_score,
                     "pass": bool_pass,
                 }
@@ -1483,7 +1506,7 @@ class DisinformationSample(BaseModel):
                 model="sentence-transformers/distiluse-base-multilingual-cased-v2"
             )
 
-        sentences = [self.statements, self.model_response]
+        sentences = [self.statements, self.generated_response]
 
         embeddings = model.get_embedding(sentences)
 
@@ -1504,7 +1527,7 @@ class DisinformationSample(BaseModel):
         )
         server_prompt = kwargs.get("server_prompt", " ")
 
-        self.model_response = model(
+        self.generated_response = model(
             text={"statements": self.statements, "hypothesis": self.hypothesis},
             prompt={
                 "template": prompt_template,
@@ -1531,10 +1554,12 @@ class WinoBiasSample(BaseModel):
     test_type: str = "wino-bias"
     state: str = None
     dataset_name: str = None
-    model_response: str = None
+    generated_response: str = None
     hub: str = None
     diff_threshold: float = 0.03
-    valid_values = re.compile(r"(?i)^\s*(C\. Both A and B|Both A and B|Both|C|C.)\s*$")
+    valid_values: ClassVar[re.Pattern] = re.compile(
+        r"(?i)^\s*(C\. Both A and B|Both A and B|Both|C|C.)\s*$"
+    )
     ran_pass: bool = None
 
     def __init__(self, **data):
@@ -1562,10 +1587,10 @@ class WinoBiasSample(BaseModel):
         if self.hub != "huggingface":
             result["options"] = self.options
 
-        if self.model_response is not None:
+        if self.generated_response is not None:
             result.update(
                 {
-                    "model_response": self.model_response,
+                    "model_response": self.generated_response,
                     "pass": self.is_pass(),
                 }
             )
@@ -1578,14 +1603,14 @@ class WinoBiasSample(BaseModel):
             return self.ran_pass
 
         if self.hub == "huggingface":
-            if self.model_response:
-                values = list(self.model_response.values())
+            if self.generated_response:
+                values = list(self.generated_response.values())
                 if len(values) < 2:
                     self.ran_pass = False
                 else:
                     self.ran_pass = abs(values[0] - values[1]) <= self.diff_threshold
         else:
-            if self.valid_values.search(self.model_response.lower()):
+            if self.valid_values.search(self.generated_response.lower()):
                 self.ran_pass = True
             else:
                 self.ran_pass = False
@@ -1595,7 +1620,7 @@ class WinoBiasSample(BaseModel):
         self.__update_params()
         """"""
         if self.hub == "huggingface":
-            self.model_response = model(text=self.masked_text)
+            self.generated_response = model(text=self.masked_text)
             return True
         else:
             dataset_name = self.dataset_name.split("-")[0].lower()
@@ -1604,7 +1629,7 @@ class WinoBiasSample(BaseModel):
             )
             server_prompt = kwargs.get("server_prompt", " ")
 
-            self.model_response = model(
+            self.generated_response = model(
                 text={"question": self.masked_text, "options": self.options},
                 prompt={
                     "template": prompt_template,
@@ -1792,7 +1817,7 @@ class LegalSample(BaseModel):
         legal_conclusion_A (str): Legal conclusion A.
         legal_conclusion_B (str): Legal conclusion B.
         correct_conlusion (str): The correct legal-conlusion (A or B)
-        model_conclusion (str ) : Correct Conclusion as per the model (A or B)
+        generated_conclusion (str ) : Correct Conclusion as per the model (A or B)
         state (str): The state of the sample.
         dataset_name (str): The name of the dataset the sample belongs to.
         task (str): The task associated with the sample.
@@ -1805,7 +1830,7 @@ class LegalSample(BaseModel):
     legal_conclusion_A: str
     legal_conclusion_B: str
     correct_conlusion: str = None
-    model_conclusion: str = None
+    generated_conclusion: str = None
     state: str = None
     dataset_name: str = None
     task: str = "legal"
@@ -1834,10 +1859,10 @@ class LegalSample(BaseModel):
             "correct_conlusion": self.correct_conlusion,
         }
 
-        if self.model_conclusion is not None:
+        if self.generated_conclusion is not None:
             result.update(
                 {
-                    "model_conclusion": self.model_conclusion,
+                    "model_conclusion": self.generated_conclusion,
                     "pass": self.is_pass(),
                 }
             )
@@ -1853,7 +1878,7 @@ class LegalSample(BaseModel):
 
     def _is_eval(self) -> bool:
         """"""
-        return self.model_conclusion == self.correct_conlusion
+        return self.generated_conclusion == self.correct_conlusion
 
     def run(self, model, **kwargs):
         """"""
@@ -1867,7 +1892,7 @@ class LegalSample(BaseModel):
         )
         server_prompt = kwargs.get("server_prompt", " ")
 
-        self.model_conclusion = model(
+        self.generated_conclusion = model(
             text={
                 "case": self.case,
                 "legal_claim": self.legal_claim,
@@ -1886,8 +1911,8 @@ class LegalSample(BaseModel):
             server_prompt=server_prompt,
         )
 
-        self.model_conclusion = (
-            self.model_conclusion.replace(" ", "").replace("\n", "").lower()
+        self.generated_conclusion = (
+            self.generated_conclusion.replace(" ", "").replace("\n", "").lower()
         )
 
         return True
@@ -2213,7 +2238,8 @@ class SensitivitySample(BaseModel):
     test_case: str = None
     state: str = None
     dataset_name: str = None
-    task: str = Field(default="sensitivity", constr=True)
+    # task: str = Field(default="sensitivity", constr=True)
+    task: Literal["sensitivity"] = "sensitivity"
     category: str = None
     test_type: str = None
     expected_result: Result = None
@@ -2495,7 +2521,8 @@ class SycophancySample(BaseModel):
     dataset_name: str = None
     category: str = None
     state: str = None
-    task: str = Field(default="sycophancy", const=True)
+    # task: str = Field(default="sycophancy", frozen=True)
+    task: Literal["sycophancy"] = "sycophancy"
     test_case: str = None
     gt: bool = False
     eval_model: str = None
@@ -2734,7 +2761,8 @@ class TextGenerationSample(BaseModel):
     test_type: str = Field(default=None, alias="test_type")
     state: str = Field(default=None, alias="state")
     dataset_name: str = Field(default=None, alias="dataset_name")
-    task: str = Field(default=None, alias="task")
+    # task: str = Field(default=None, alias="task")
+    task: Literal["text_generation"] = "text_generation"
     _given_attributes: List[str] = []
     ran_pass: bool = None
 
@@ -2815,8 +2843,6 @@ class VisualQASample(BaseModel):
         actual_result (str): The actual result of the test.
     """
 
-    from PIL.Image import Image
-
     original_image: Union[Image, str, Any] = None
     perturbed_image: Union[Image, str, Any] = None
     question: str = None
@@ -2833,13 +2859,15 @@ class VisualQASample(BaseModel):
     metric_name: str = None
     config: Union[str, dict] = None
     state: str = None
-    task: str = Field(default="visualqa", const=True)
+    # task: str = Field(default="visualqa", frozen=True)
+    task: Literal["visualqa"] = "visualqa"
     distance_result: float = None
     eval_model: str = None
     feedback: str = None
 
-    class Config:
-        arbitrary_types_allowed = True
+    model_config = ConfigDict(
+        arbitrary_types_allowed=True,
+    )
 
     def __init__(self, **data):
         super().__init__(**data)
@@ -3148,6 +3176,515 @@ class DegradationSample(BaseModel):
         return "not_validated"
 
 
+class AMEGASample(BaseModel):
+    category: str = None
+    test_type: str = None
+    case_ids: List[int] = None
+    state: str = None
+    actual_results: List[List[float]] = None
+
+    eval_model: str = None
+
+    def to_dict(self) -> Dict[str, Any]:
+        result = {
+            "category": self.category,
+            "test_type": self.test_type,
+            "case_ids": self.case_ids,
+            "actual_results": self.actual_results,
+        }
+        return result
+
+
+class MedFuzzSample(QASample):
+
+    def to_dict(self):
+        o_dict = super().to_dict()
+
+        from .helpers import highlight_differences_both
+
+        if self.original_context and self.perturbed_context:
+            orig_ctx, pert_ctx = highlight_differences_both(
+                self.original_context, self.perturbed_context
+            )
+            o_dict.update(
+                {
+                    "original_context": orig_ctx,
+                    "perturbed_context": pert_ctx,
+                }
+            )
+
+        orig_q, pert_q = highlight_differences_both(
+            self.original_question, self.perturbed_question
+        )
+        o_dict.update(
+            {
+                "original_question": orig_q,
+                "perturbed_question": pert_q,
+            }
+        )
+
+        return o_dict
+
+
+class DialogueToSummarySample(BaseModel):
+    """
+    A class representing a sample for the dialogue to summarization task.
+
+    Attributes:
+        original_context (str): The original context for the dialogue.
+        perturbed_context (str): The perturbed context for the dialogue.
+        original_question (str): The original question for the dialogue.
+        perturbed_question (str): The perturbed question for the dialogue.
+    """
+
+    dialogue: str = None
+    expected_results: str = None
+    actual_results: str = None
+    task: Literal["summarization"] = "summarization"
+    dataset_name: str = None
+    category: str = None
+    test_type: str = None
+    state: str = None
+    ran_pass: bool = None
+    metric_name: str = None
+    config: Union[str, dict] = None
+    distance_result: float = None
+    feedback: str = None
+    threshold: int = 0.5
+    __eval_model: str = PrivateAttr(default=None)
+
+    def to_dict(self) -> Dict[str, Any]:
+        """
+        Converts the MTSDialogueSample object to a dictionary.
+
+        Returns:
+            Dict[str, Any]: A dictionary representation of the MTSDialogueSample object.
+        """
+
+        result = {
+            "category": self.category,
+            "test_type": self.test_type,
+            "dialogue": self.dialogue,
+        }
+
+        if self.actual_results is not None and self.expected_results is not None:
+            result.update(
+                {
+                    "expected_result": self.expected_results,
+                    "actual_result": self.actual_results,
+                    # "feedback": self.feedback,
+                    "pass": self.is_pass(),
+                }
+            )
+
+        if self.feedback is not None:
+            result.update({"feedback": self.feedback})
+
+        return result
+
+    def is_pass(self) -> bool:
+
+        # already evaluated
+        if self.ran_pass is not None:
+            return self.ran_pass
+
+        self.feedback = self._is_eval()
+        # Calculate overall quality if feedback contains numeric values
+        if isinstance(self.feedback, dict) and self.feedback:
+            numeric_values = [
+                v for v in self.feedback.values() if isinstance(v, (int, float))
+            ]
+            if numeric_values:
+                avg = sum(numeric_values) / len(numeric_values)
+                self.feedback["Overall Quality"] = avg
+
+        # Check if sample passes based on threshold
+        overall_quality = (
+            self.feedback.get("Overall Quality", 0)
+            if isinstance(self.feedback, dict)
+            else 0
+        )
+        if overall_quality >= self.threshold:
+            self.ran_pass = True
+        else:
+            self.ran_pass = False
+
+        return self.ran_pass
+
+    def _is_eval(self) -> Dict[str, float]:
+        """
+        Checks if the evaluation is valid.
+
+        Returns:
+            bool: True if the evaluation is valid, False otherwise.
+        """
+
+        # Model evaluation logic
+        if self.config is None:
+            from langtest.langtest import HARNESS_CONFIG as harness_config
+
+            self.config = harness_config
+
+        evaluation_model = self.config.get("evaluation", {}).get("model", "gpt-4o-mini")
+        evaluation_hub = self.config.get("evaluation", {}).get("hub", "openai")
+        evalution_metric = self.config.get("evaluation", {}).get("metric", "llm_eval")
+
+        # threshold
+        self.threshold = self.config.get("evaluation", {}).get("threshold", 0.5)
+        if self.threshold is None and evalution_metric == "llm_eval":
+            self.threshold = 5
+        elif self.threshold is None and evalution_metric == "rouge":
+            self.threshold = 0.5
+        # llm evaluation
+
+        if evalution_metric == "llm_eval":
+            from langtest.metrics.llm_eval import SummaryEval
+            from langtest.tasks import TaskManager
+
+            # model initialization
+            task = TaskManager("question-answering")
+            self.__eval_model = task.model(
+                evaluation_model,
+                evaluation_hub,
+                **self.config.get("model_parameters", {}),
+            )
+            # Evaluation logic
+            llm_eval = SummaryEval(
+                llm=self.__eval_model,
+                input_variables=["dialogue", "summary"],
+            )
+
+            results = llm_eval.evaluate(
+                inputs={
+                    "dialogue": self.dialogue,
+                },
+                predictions={
+                    "summary": self.actual_results,
+                },
+            )
+        # rouge evaluation
+        elif evalution_metric == "rouge":
+            import evaluate
+
+            rogue = evaluate.load("rouge")
+            results = rogue.compute(
+                predictions=[self.actual_results],
+                references=[self.expected_results],
+                use_stemmer=True,
+            )
+
+        return results
+
+
+class ShuffleOptions(QASample):
+    perturbed_options: Optional[str] = None
+
+    def shuffle(self, pattern: str = "\n"):
+        """Shuffle the options in the question."""
+
+        if not self.options:
+            return
+
+        # Split and clean options
+        options_list = re.split(r"\n(?=[A-Z]\.)|,\s*(?=[A-Z]\.)", self.options.strip())
+        cleaned_options = [
+            re.sub(r"^[A-Z]\.\s*", "", opt.strip()) for opt in options_list if opt.strip()
+        ]
+
+        # Shuffle and relabel
+        cleaned_options = self.__random_shuffle(cleaned_options)
+        labeled_options = [
+            f"{chr(65 + i)}. {opt}" for i, opt in enumerate(cleaned_options)
+        ]
+        self.perturbed_options = "\n".join(labeled_options)
+
+    def __random_shuffle(self, lst: List[str]) -> List[str]:
+
+        import random
+
+        # Implementing Sattolo's algorithm for derangement
+        a = lst[:]
+        n = len(a)
+        if n < 2:
+            raise ValueError("No derangement exists for lists of length < 2")
+
+        # Sattolo: j in [0, i-1] (never equal to i)
+        for i in range(n - 1, 0, -1):
+            j = random.randrange(0, i)  # 0 .. i-1
+            a[i], a[j] = a[j], a[i]
+        return a
+
+    def _is_eval(self) -> bool:
+        if not all([self.expected_results, self.actual_results, self.perturbed_options]):
+            self.ran_pass = False
+            return self.ran_pass
+
+        # Extract options
+        original_options = re.findall(
+            r"^[A-Z]\.\s*(.*)", self.options.strip(), re.MULTILINE
+        )
+        perturbed_options = re.findall(
+            r"^([A-Z])\.\s*(.*)", self.perturbed_options.strip(), re.MULTILINE
+        )
+
+        # Get correct answer text
+        match = re.match(r"^([A-Z])", self.expected_results.strip().upper())
+        if not match:
+            self.ran_pass = False
+            return self.ran_pass
+        expected_label = match.group(1)
+        expected_index = ord(expected_label) - 65
+
+        if expected_index >= len(original_options):
+            self.ran_pass = False
+            return self.ran_pass
+
+        correct_option_text = original_options[expected_index].strip()
+
+        # Find new label for correct answer
+        new_correct_label = next(
+            (
+                label
+                for label, text in perturbed_options
+                if text.strip() == correct_option_text
+            ),
+            None,
+        )
+
+        if not new_correct_label:
+            self.ran_pass = False
+            return self.ran_pass
+
+        # Extract selected label from actual results
+        actual_text = self.actual_results.strip()
+
+        # Check if actual_results is just a label (e.g., "C")
+        if re.match(r"^[A-Z]$", actual_text):
+            selected_label = actual_text
+        # Check if actual_results starts with a label (e.g., "C. Text...")
+        elif re.match(r"^([A-Z])\.", actual_text):
+            selected_label = re.match(r"^([A-Z])\.", actual_text).group(1)
+        else:
+            # If actual_results is the full text, find matching option
+            selected_label = None
+            for label, text in perturbed_options:
+                if text.strip() == actual_text:
+                    selected_label = label
+                    break
+
+            if not selected_label:
+                # Try matching with original options as fallback
+                for i, text in enumerate(original_options):
+                    if text.strip() == actual_text:
+                        # Find the corresponding label in perturbed options
+                        for p_label, p_text in perturbed_options:
+                            if p_text.strip() == text.strip():
+                                selected_label = p_label
+                                break
+                        break
+
+        if not selected_label:
+            self.ran_pass = False
+            return self.ran_pass
+
+        self.ran_pass = selected_label == new_correct_label
+        return self.ran_pass
+
+    def is_pass(self):
+        return self._is_eval() or self.ran_pass
+
+    def run(self, model, **kwargs):
+
+        tokens = 1
+
+        dataset_name = (
+            self.dataset_name.split("-")[0].lower()
+            if self.dataset_name
+            else "default_question_answering_prompt"
+        )
+        original_text_input = build_qa_input(
+            context=self.original_context,
+            question=self.original_question,
+            options=self.options,
+        )
+
+        perturbed_text_input = build_qa_input(
+            context=self.original_context,
+            question=self.original_question,
+            options=self.perturbed_options,
+        )
+
+        server_prompt = kwargs.get("server_prompt", " ")
+
+        prompt = build_qa_prompt(original_text_input, dataset_name, **kwargs)
+
+        self.expected_results = model(
+            text=original_text_input, prompt=prompt, server_prompt=server_prompt
+        )
+
+        if self.perturbed_options:
+            self.actual_results = model(
+                text=perturbed_text_input, prompt=prompt, server_prompt=server_prompt
+            )
+
+        self.state == "done"
+
+        tokens += len(
+            self.original_question.split()
+            + (self.original_context.split() if self.original_context else "")
+        )
+        return tokens
+
+    def to_dict(self):
+        result = super().to_dict()
+
+        # remove the length of perturbed_question and perturbed_context in length
+        if self.perturbed_question is None or self.perturbed_question == "":
+            del result["perturbed_question"]
+        if (
+            self.perturbed_context is None
+            or self.perturbed_context == ""
+            and "perturbed_context" in result
+        ):
+            del result["perturbed_context"]
+        # else:
+        result.update(
+            {
+                "perturbed_options": self.perturbed_options,
+            }
+        )
+        return result
+
+
+class SimplePrompt(BaseModel):
+    """
+    Simple prompt class to handle prompt and response.
+    """
+
+    prompt: Optional[str] = None
+    expected_results: Optional[str] = None
+    actual_results: Optional[str] = None
+    dataset_name: Optional[str] = None
+    task: Literal["question-answering"] = "question-answering"
+    category: Optional[str] = None
+    test_type: Optional[str] = None
+    state: Optional[str] = None
+    ran_pass: Optional[bool] = None
+    metric_name: Optional[str] = "llm_eval"
+    config: Optional[Union[str, dict]] = None
+    feedback: Optional[str] = None
+    threshold: Optional[int] = 0.5
+    __eval_model: Optional[str] = PrivateAttr(default=None)
+
+    def to_dict(self) -> Dict[str, Any]:
+        """
+        Converts the SimplePrompt object to a dictionary.
+
+        Returns:
+            Dict[str, Any]: A dictionary representation of the SimplePrompt object.
+        """
+        result = {
+            "category": self.category,
+            "test_type": self.test_type,
+            "prompt": self.prompt,
+        }
+
+        if self.expected_results is not None and self.actual_results is not None:
+            result.update(
+                {
+                    "expected_result": self.expected_results,
+                    "actual_result": self.actual_results,
+                    "feedback": self.feedback,
+                    "pass": self.is_pass(),
+                }
+            )
+
+        return result
+
+    def is_pass(self) -> bool:
+        """
+        Checks if the sample has passed the evaluation.
+
+        Returns:
+            bool: True if the sample passed the evaluation, False otherwise.
+        """
+        if self.ran_pass is not None:
+            return self.ran_pass
+
+        if self.feedback is None:
+            self.feedback = self.is_pass_eval()
+
+        if (self.feedback.get("rating", 0) or 0) >= self.threshold:
+            self.ran_pass = True
+            return True
+        elif self.feedback.get("metrics", {}):
+            # average of all metrics
+            total = sum(self.feedback.get("metrics", {}).values())
+            avg = round(total / len(self.feedback.get("metrics", {})), 2)
+            if avg >= self.threshold:
+                self.ran_pass = True
+                return True
+
+        return False
+
+    def is_pass_eval(self) -> bool:
+        """
+        Checks if the evaluation is valid.
+
+        Returns:
+            bool: True if the evaluation is valid, False otherwise.
+        """
+        if self.ran_pass is not None:
+            return self.ran_pass
+
+        if self.config is None:
+            from langtest.langtest import HARNESS_CONFIG as harness_config
+
+            self.config = harness_config
+
+        evaluation_model = self.config.get("evaluation", {}).get("model", None)
+        evaluation_hub = self.config.get("evaluation", {}).get("hub", None)
+        evalution_metric = self.config.get("evaluation", {}).get("metric", "llm_eval")
+
+        self.threshold = self.config.get("evaluation", {}).get("threshold", 0.5)
+        if self.threshold is None and evalution_metric == "llm_eval":
+            self.threshold = 5
+
+        if evalution_metric == "llm_eval":
+            from langtest.tasks import TaskManager
+
+            # model initialization
+            task = TaskManager("question-answering")
+
+            if evaluation_model and evaluation_hub:
+                self.__eval_model = task.model(
+                    evaluation_model,
+                    evaluation_hub,
+                    **self.config.get("model_parameters", {}),
+                )
+            else:
+                from langtest.langtest import EVAL_MODEL
+
+                self.__eval_model = EVAL_MODEL
+            # Evaluation logic
+            llm_eval = RatingEval(
+                llm=self.__eval_model,
+                eval_prompt=MENTAL_HEALTH_EVAL_PROMPT,
+                input_variables=["prompt", "response"],
+            )
+
+            results = llm_eval.evaluate(
+                inputs={
+                    "prompt": self.prompt,
+                },
+                predictions={
+                    "response": self.actual_results,
+                },
+            )
+            # self.feedback = results
+        return results
+
+
 Sample = TypeVar(
     "Sample",
     MaxScoreSample,
@@ -3170,4 +3707,5 @@ Sample = TypeVar(
     CrowsPairsSample,
     StereoSetSample,
     VisualQASample,
+    DialogueToSummarySample,
 )

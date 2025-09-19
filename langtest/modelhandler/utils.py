@@ -50,11 +50,11 @@ MODEL_CLASSES: Dict[str, Union[Info, str]] = {
     },
     "databricks": {
         "chat": {
-            "module": "langchain_databricks.chat_models",
+            "module": "databricks_langchain.chat_models",
             "class_name": "ChatDatabricks",
         },
         "completion": {
-            "module": "langchain_databricks.llms",
+            "module": "databricks_langchain.llms",
             "class_name": "Databricks",
         },
     },
@@ -100,6 +100,16 @@ MODEL_CLASSES: Dict[str, Union[Info, str]] = {
         },
     },
     "openai": {
+        "chat": {
+            "module": "langchain_openai.chat_models",
+            "class_name": "ChatOpenAI",
+        },
+        "completion": {
+            "module": "langchain_openai.llms",
+            "class_name": "OpenAI",
+        },
+    },
+    "openrouter": {
         "chat": {
             "module": "langchain_openai.chat_models",
             "class_name": "ChatOpenAI",

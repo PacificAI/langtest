@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://raw.githubusercontent.com/JohnSnowLabs/langtest/main/docs/assets/images/langtest/langtest_logo.png" alt="johnsnowlabs_logo" width="360" style="text-align:center;">
+  <img src="https://raw.githubusercontent.com/Pacific-AI-Corp/langtest/main/docs/assets/images/langtest/langtest_logo.png" alt="pacific_ai_logo" width="360" style="text-align:center;">
 </p>
 
 <div align="center">
@@ -7,8 +7,8 @@
 </div>
 
 <p align="center">
-    <a href="https://github.com/JohnSnowLabs/langtest/releases">
-        <img alt="Release Notes" src="https://img.shields.io/github/v/release/johnsnowlabs/langtest.svg">
+    <a href="https://github.com/Pacific-AI-Corp/langtest/releases">
+        <img alt="Release Notes" src="https://img.shields.io/github/v/release/Pacific-AI-Corp/langtest.svg">
     </a>
     <a href="https://www.johnsnowlabs.com/responsible-ai-blog/">
         <img alt="Blog" src="https://img.shields.io/badge/Responsible AI Blogs-8A2BE2">
@@ -16,26 +16,26 @@
     <a href="https://langtest.org/docs/pages/docs/install">
         <img alt="Documentation" src="https://img.shields.io/website?up_message=online&url=https%3A%2F%2Flangtest.org%2F">
     </a>
-    <a href="https://star-history.com/#JohnSnowLabs/langtest">
-        <img alt="GitHub star chart" src="https://img.shields.io/github/stars/JohnSnowLabs/langtest?style=social">
+    <a href="https://star-history.com/#Pacific-AI-Corp/langtest">
+        <img alt="GitHub star chart" src="https://img.shields.io/github/stars/Pacific-AI-Corp/langtest?style=social">
     </a>
-    <a href="https://github.com/JohnSnowLabs/langtest/issues">
-        <img alt="Open Issues" src="https://img.shields.io/github/issues-raw/JohnSnowLabs/langtest">
+    <a href="https://github.com/Pacific-AI-Corp/langtest/issues">
+        <img alt="Open Issues" src="https://img.shields.io/github/issues-raw/Pacific-AI-Corp/langtest">
     </a>
     <a href="https://pepy.tech/project/langtest">
         <img alt="Downloads" src="https://static.pepy.tech/badge/langtest">
     </a>
-    <a href="https://github.com/JohnSnowLabs/langtest/actions/workflows/build_and_test.yml">
-        <img alt="CI" src="https://github.com/JohnSnowLabs/langtest/actions/workflows/build_and_test.yml/badge.svg">
+    <a href="https://github.com/Pacific-AI-Corp/langtest/actions/workflows/build_and_test.yml">
+        <img alt="CI" src="https://github.com/Pacific-AI-Corp/langtest/actions/workflows/build_and_test.yml/badge.svg">
     </a>
-    <a href="https://github.com/JohnSnowLabs/langtest/blob/master/LICENSE" alt="License">
+    <a href="https://github.com/Pacific-AI-Corp/langtest/blob/master/LICENSE" alt="License">
         <img src="https://img.shields.io/badge/License-Apache%202.0-blue.svg" />
     </a>
     <a href="CODE_OF_CONDUCT.md">
         <img alt="Contributor Covenant" src="https://img.shields.io/badge/Contributor%20Covenant-v2.0%20adopted-ff69b4.svg">
     </a>
 
-![Langtest Workflow](https://raw.githubusercontent.com/JohnSnowLabs/langtest/main/docs/assets/images/langtest/langtest_flow_graphic.jpeg)
+![Langtest Workflow](https://raw.githubusercontent.com/Pacific-AI-Corp/langtest/main/docs/assets/images/langtest/langtest_flow_graphic.jpeg)
 
 <p align="center">
   <a href="https://langtest.org/">Project's Website</a> •
@@ -121,8 +121,8 @@ You can check out the following LangTest articles:
 ## Community Support
 
 - [Slack](https://www.johnsnowlabs.com/slack-redirect/) For live discussion with the LangTest community, join the `#langtest` channel
-- [GitHub](https://github.com/JohnSnowLabs/langtest/tree/main) For bug reports, feature requests, and contributions
-- [Discussions](https://github.com/JohnSnowLabs/langtest/discussions) To engage with other community members, share ideas, and show off how you use LangTest!
+- [GitHub](https://github.com/Pacific-AI-Corp/langtest/tree/main) For bug reports, feature requests, and contributions
+- [Discussions](https://github.com/Pacific-AI-Corp/langtest/discussions) To engage with other community members, share ideas, and show off how you use LangTest!
 
 ## Mission
 
@@ -141,20 +141,20 @@ We propose here an early stage open-source community project that aims to fill t
 
 We welcome all sorts of contributions:
 
-- [Ideas](https://github.com/JohnSnowLabs/langtest/discussions/categories/ideas)
-- [Discussions](https://github.com/JohnSnowLabs/langtest/discussions)
-- [Feedback](https://github.com/JohnSnowLabs/langtest/discussions/categories/general)
+- [Ideas](https://github.com/Pacific-AI-Corp/langtest/discussions/categories/ideas)
+- [Discussions](https://github.com/Pacific-AI-Corp/langtest/discussions)
+- [Feedback](https://github.com/Pacific-AI-Corp/langtest/discussions/categories/general)
 - [Documentation](https://www.example.com/documentation)
 - [Bug reports](https://www.example.com/bug-reports)
 
-A detailed overview of contributing can be found in the **[contributing guide](https://github.com/JohnSnowLabs/langtest/blob/main/CONTRIBUTING.md)**.
+A detailed overview of contributing can be found in the **[contributing guide](https://github.com/Pacific-AI-Corp/langtest/blob/main/CONTRIBUTING.md)**.
 
-If you are looking to start working with the LangTest codebase, navigate to the GitHub ["issues"](https://github.com/JohnSnowLabs/langtest/issues) tab and start looking through interesting issues. There are a number of issues listed under where you could start out.
+If you are looking to start working with the LangTest codebase, navigate to the GitHub ["issues"](https://github.com/Pacific-AI-Corp/langtest/issues) tab and start looking through interesting issues. There are a number of issues listed under where you could start out.
 Or maybe through using LangTest you have an idea of your own or are looking for something in the documentation and thinking ‘This can be improved’...you can do something about it!
 
-Feel free to ask questions on the [Q&A](https://github.com/JohnSnowLabs/langtest/discussions/categories/q-a) discussions.
+Feel free to ask questions on the [Q&A](https://github.com/Pacific-AI-Corp/langtest/discussions/categories/q-a) discussions.
 
-As contributors and maintainers to this project, you are expected to abide by LangTest's code of conduct. More information can be found at: [Contributor Code of Conduct](https://github.com/JohnSnowLabs/langtest/blob/release/1.8.0/CODE_OF_CONDUCT.md)
+As contributors and maintainers to this project, you are expected to abide by LangTest's code of conduct. More information can be found at: [Contributor Code of Conduct](https://github.com/Pacific-AI-Corp/langtest/blob/release/1.8.0/CODE_OF_CONDUCT.md)
 
 
 ## Citation
@@ -178,11 +178,11 @@ the LangTest library:
 
 We would like to acknowledge all contributors of this open-source community project. 
 
-<a href="https://github.com/johnsnowlabs/langtest/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=johnsnowlabs/langtest" />
+<a href="https://github.com/Pacific-AI-Corp/langtest/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=Pacific-AI-Corp/langtest" />
 </a>
 
 ## License
 
-LangTest is released under the [Apache License 2.0](https://github.com/JohnSnowLabs/langtest/blob/main/LICENSE), which guarantees commercial use, modification, distribution, patent use, private use and sets limitations on trademark use, liability and warranty.
+LangTest is released under the [Apache License 2.0](https://github.com/Pacific-AI-Corp/langtest/blob/main/LICENSE), which guarantees commercial use, modification, distribution, patent use, private use and sets limitations on trademark use, liability and warranty.
 

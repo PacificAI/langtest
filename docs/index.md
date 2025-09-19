@@ -1,7 +1,7 @@
 ---
 layout: landing
 title: 'LangTest <span>Deliver Safe & Effective Language Models</span>'
-excerpt: <br> 60+ Test Types for Comparing LLM & NLP Models on Accuracy, Bias, Fairness, Robustness & More
+excerpt: <br> 100+ Test Types for Comparing LLM & NLP Models on Accuracy, Bias, Fairness, Robustness & More
 permalink: /
 header: true
 article_header:
@@ -11,7 +11,7 @@ article_header:
      url: /docs/pages/docs/install   
    - text: '<i class="fab fa-github"></i>Star on GitHub'
      type: full_white
-     url: https://github.com/JohnSnowLabs/langtest 
+     url: https://github.com/Pacific-AI-Corp/langtest 
    - text: '<i class="fab fa-slack-hash"></i> Slack'
      type: trans
      url: https://spark-nlp.slack.com/archives/C051A5XG6CU   

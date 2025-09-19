@@ -44,7 +44,7 @@ modify_date: 2023-08-11
 * [LangTest: Documentation](https://langtest.org/docs/pages/docs/install)
 * [LangTest: Notebooks](https://langtest.org/docs/pages/tutorials/tutorials)
 * [LangTest: Test Types](https://langtest.org/docs/pages/tests/test)
-* [LangTest: GitHub Repo](https://github.com/JohnSnowLabs/langtest)
+* [LangTest: GitHub Repo](https://github.com/Pacific-AI-Corp/langtest)
 
 ## ⚒️ Previous Versions
 

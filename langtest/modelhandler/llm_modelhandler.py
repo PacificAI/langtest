@@ -1,7 +1,8 @@
 import importlib
 import inspect
 
-from typing import Any, List, Union
+import os
+from typing import Any, List, Type, Union, TypeVar
 import langchain.llms as lc
 import langchain.chat_models as chat_models
 from langchain.chains.llm import LLMChain
@@ -13,8 +14,7 @@ from pydantic.v1 import Field, ValidationError
 from langtest.utils.custom_types.output import NEROutput
 from langtest.utils.custom_types.predictions import NERPrediction
 from ..modelhandler.modelhandler import ModelAPI, LANGCHAIN_HUBS
-from ..errors import Errors, Warnings
-import logging
+from ..errors import Errors
 from functools import lru_cache
 from langtest.utils.custom_types.helpers import HashableDict
 from langchain.chat_models.base import BaseChatModel
@@ -33,6 +33,10 @@ class PretrainedModelForQA(ModelAPI):
         ConfigError: If there is an error in the model configuration.
     """
 
+    _T = TypeVar("_T", bound="PretrainedModelForQA")
+    _L = TypeVar("_L", bound="BaseLanguageModel")
+    _C = TypeVar("_C", bound="BaseChatModel")
+
     HUB_PARAM_MAPPING = {
         "azure-openai": "max_tokens",
         "ai21": "maxTokens",
@@ -41,7 +45,7 @@ class PretrainedModelForQA(ModelAPI):
         "huggingface-inference-api": "max_length",
     }
 
-    def __init__(self, hub: str, model: Any, *args, **kwargs):
+    def __init__(self, hub: str, model: Union[str, Type[_L], Type[_C]], *args, **kwargs):
         """Constructor class
 
         Args:
@@ -60,7 +64,7 @@ class PretrainedModelForQA(ModelAPI):
         self.predict.cache_clear()
 
     @classmethod
-    def load_model(cls, hub: str, path: str, *args, **kwargs) -> "PretrainedModelForQA":
+    def load_model(cls: Type[_T], hub: str, path: str, *args, **kwargs) -> _T:
         """Load the pretrained model.
 
         Args:
@@ -167,7 +171,7 @@ class PretrainedModelForQA(ModelAPI):
                     output_schema,
                     **({"method": "json_schema"} if hub == "ollama" else {}),
                 )
-            return cls(hub, cls.model, *args, **filtered_kwargs)
+            return cls(hub, cls.model, *args, **{**filtered_kwargs, **kwargs})
 
         except ModuleNotFoundError:
             module = MODEL_CLASSES[hub].get("module", None)
@@ -191,13 +195,14 @@ class PretrainedModelForQA(ModelAPI):
             hub (str): The hub name for the model.
             kwargs (dict): Keyword arguments to be updated.
         """
-        if hub == "azure-openai" and "deployment_name" not in kwargs:
-            kwargs["deployment_name"] = "gpt-3.5-turbo-instruct"
-            logging.warning(Warnings.W014(hub=hub, kwargs=kwargs))
 
         if "max_tokens" in kwargs and hub in cls.HUB_PARAM_MAPPING:
             new_tokens_key = cls.HUB_PARAM_MAPPING[hub]
             kwargs[new_tokens_key] = kwargs.pop("max_tokens")
+
+        if hub in ["openrouter"]:
+            kwargs["base_url"] = "https://openrouter.ai/api/v1"
+            kwargs["api_key"] = os.environ.get("OPENROUTER_API_KEY", "")
 
     @lru_cache(maxsize=102400)
     def predict(self, text: Union[str, dict], prompt: dict, *args, **kwargs):

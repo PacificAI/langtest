@@ -29,7 +29,7 @@ John Snow Labs is thrilled to announce the release of LangTest 2.3.0! This updat
 ## 🔥 Key Enhancements:
 
 ### 🔗 **Enhanced Multi-Model, Multi-Dataset Support**
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/JohnSnowLabs/langtest/blob/main/demo/tutorials/misc/Multi_Model_Multi_Dataset.ipynb)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Pacific-AI-Corp/langtest/blob/main/demo/tutorials/misc/Multi_Model_Multi_Dataset.ipynb)
 
 Introducing the enhanced Multi-Model, Multi-Dataset Support feature, designed to streamline and elevate the evaluation of multiple models across diverse datasets.
 
@@ -130,13 +130,13 @@ harness = Harness(
 ```python
 harness.generate().run().report()
 ```
-![image](https://github.com/JohnSnowLabs/langtest/assets/23481244/197c1009-d0aa-4f3e-b882-ce0ebb5ac91d)
+![image](https://github.com/Pacific-AI-Corp/langtest/assets/23481244/197c1009-d0aa-4f3e-b882-ce0ebb5ac91d)
 
 
 This enhancement allows for a more efficient and insightful evaluation process, ensuring that models are thoroughly tested and compared across a variety of scenarios.
 
 ### 💊 **Generic to Brand Drug Name Swapping Tests**
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/JohnSnowLabs/langtest/blob/main/demo/tutorials/llm_notebooks/Swapping_Drug_Names_Test.ipynb)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Pacific-AI-Corp/langtest/blob/main/demo/tutorials/llm_notebooks/Swapping_Drug_Names_Test.ipynb)
 
 This key enhancement enables the swapping of generic drug names with brand names and vice versa, ensuring accurate and relevant evaluations in medical and pharmaceutical contexts. The `drug_generic_to_brand` and `drug_brand_to_generic` tests are available in the clinical category.
 
@@ -194,12 +194,12 @@ harness.configure(
 ```python
 harness.generate().run().report()
 ```
-![image](https://github.com/JohnSnowLabs/langtest/assets/23481244/d5737144-b9f5-47df-973b-4a35501f522c)
+![image](https://github.com/Pacific-AI-Corp/langtest/assets/23481244/d5737144-b9f5-47df-973b-4a35501f522c)
 
 This enhancement ensures that medical and pharmaceutical models are evaluated with the highest accuracy and contextual relevance, considering the use of both generic and brand drug names.
 
 ### 📈 **Prometheus Model Integration**
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/JohnSnowLabs/langtest/blob/main/demo/tutorials/misc/Evaluation_with_Prometheus_Eval.ipynb)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Pacific-AI-Corp/langtest/blob/main/demo/tutorials/misc/Evaluation_with_Prometheus_Eval.ipynb)
 
 Integrating the Prometheus model enhances evaluation capabilities, providing detailed and insightful metrics for comprehensive model performance assessment.
 
@@ -254,12 +254,12 @@ harness.generate().run().report()
 ```
 ![image](https://github.com/user-attachments/assets/44c05395-f326-4cf5-9f47-d154282042a7)
 
-![image](https://github.com/JohnSnowLabs/langtest/assets/23481244/603ec856-d421-40f8-a440-195f171ae799)
+![image](https://github.com/Pacific-AI-Corp/langtest/assets/23481244/603ec856-d421-40f8-a440-195f171ae799)
 
 This integration ensures that model performance is assessed with a higher degree of accuracy and detail, leveraging the advanced capabilities of the Prometheus model to provide meaningful and actionable insights.
 
 ### 🛡 **Safety Testing Enhancements**
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/JohnSnowLabs/langtest/blob/main/demo/tutorials/misc/Misuse_Test_with_Prometheus_evaluation.ipynb)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Pacific-AI-Corp/langtest/blob/main/demo/tutorials/misc/Misuse_Test_with_Prometheus_evaluation.ipynb)
 
 LangTest offers advanced safety testing to identify and mitigate potential misuse and safety issues in your models. This comprehensive suite of tests aims to expose potential issues and ensure that models behave responsibly and adhere to ethical guidelines, preventing harmful or unintended outputs.
 
@@ -324,10 +324,10 @@ Significant enhancements to the logging functionalities provide more detailed an
 
 | Notebooks          | Colab Link |
 |--------------------|-------------|
-| Multi-Model, Multi-Dataset         | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/JohnSnowLabs/langtest/blob/main/demo/tutorials/misc/Multi_Model_Multi_Dataset.ipynb)|
-| Evaluation with Prometheus Eval     | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/JohnSnowLabs/langtest/blob/main/demo/tutorials/misc/Evaluation_with_Prometheus_Eval.ipynb)|
-| Swapping Drug Names Test     | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/JohnSnowLabs/langtest/blob/main/demo/tutorials/llm_notebooks/Swapping_Drug_Names_Test.ipynb)|
-| Misuse Test with Prometheus Evaluation     | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/JohnSnowLabs/langtest/blob/main/demo/tutorials/misc/Misuse_Test_with_Prometheus_evaluation.ipynb)|
+| Multi-Model, Multi-Dataset         | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Pacific-AI-Corp/langtest/blob/main/demo/tutorials/misc/Multi_Model_Multi_Dataset.ipynb)|
+| Evaluation with Prometheus Eval     | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Pacific-AI-Corp/langtest/blob/main/demo/tutorials/misc/Evaluation_with_Prometheus_Eval.ipynb)|
+| Swapping Drug Names Test     | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Pacific-AI-Corp/langtest/blob/main/demo/tutorials/llm_notebooks/Swapping_Drug_Names_Test.ipynb)|
+| Misuse Test with Prometheus Evaluation     | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Pacific-AI-Corp/langtest/blob/main/demo/tutorials/misc/Misuse_Test_with_Prometheus_evaluation.ipynb)|
 
 
 ## 🚀 New LangTest blogs :
@@ -351,25 +351,25 @@ Significant enhancements to the logging functionalities provide more detailed an
 - Adding notebooks and websites changes 2.3.0 [#1063]
 
 ## What's Changed
-* chore: update langtest version to 2.2.0 by @chakravarthik27 in https://github.com/JohnSnowLabs/langtest/pull/1031
-* Enhancements/improve the logging and its functionalities by @chakravarthik27 in https://github.com/JohnSnowLabs/langtest/pull/1038
-* Refactor/improve the transform module by @chakravarthik27 in https://github.com/JohnSnowLabs/langtest/pull/1044
-* expand-entity-type-support-in-label-representation-tests by @chakravarthik27 in https://github.com/JohnSnowLabs/langtest/pull/1042
-* chore: Update GitHub Pages workflow for Jekyll site deployment by @chakravarthik27 in https://github.com/JohnSnowLabs/langtest/pull/1050
-* Feature/add support for multi model with multi dataset by @chakravarthik27 in https://github.com/JohnSnowLabs/langtest/pull/1039
-* Add support to the LLM eval class in Accuracy Category. by @chakravarthik27 in https://github.com/JohnSnowLabs/langtest/pull/1053
-* feat: Add SafetyTestFactory and Misuse class for safety testing by @chakravarthik27 in https://github.com/JohnSnowLabs/langtest/pull/1040
-* Fix/alignment issues in bias tests for ner task by @chakravarthik27 in https://github.com/JohnSnowLabs/langtest/pull/1060
-* Feature/integrate prometheus model for enhanced evaluation by @chakravarthik27 in https://github.com/JohnSnowLabs/langtest/pull/1055
-* chore: update dependencies by @chakravarthik27 in https://github.com/JohnSnowLabs/langtest/pull/1047
-* Feature/implement the generic to brand drug name swapping tests and vice versa by @chakravarthik27 in https://github.com/JohnSnowLabs/langtest/pull/1058
-* Fix/bugs from langtest 230rc1 by @chakravarthik27 in https://github.com/JohnSnowLabs/langtest/pull/1062
-* Fix/bugs from langtest 230rc2 by @chakravarthik27 in https://github.com/JohnSnowLabs/langtest/pull/1064
-* chore: adding notebooks and websites changes - 2.3.0 by @chakravarthik27 in https://github.com/JohnSnowLabs/langtest/pull/1063
-* Release/2.3.0 by @chakravarthik27 in https://github.com/JohnSnowLabs/langtest/pull/1065
+* chore: update langtest version to 2.2.0 by @chakravarthik27 in https://github.com/Pacific-AI-Corp/langtest/pull/1031
+* Enhancements/improve the logging and its functionalities by @chakravarthik27 in https://github.com/Pacific-AI-Corp/langtest/pull/1038
+* Refactor/improve the transform module by @chakravarthik27 in https://github.com/Pacific-AI-Corp/langtest/pull/1044
+* expand-entity-type-support-in-label-representation-tests by @chakravarthik27 in https://github.com/Pacific-AI-Corp/langtest/pull/1042
+* chore: Update GitHub Pages workflow for Jekyll site deployment by @chakravarthik27 in https://github.com/Pacific-AI-Corp/langtest/pull/1050
+* Feature/add support for multi model with multi dataset by @chakravarthik27 in https://github.com/Pacific-AI-Corp/langtest/pull/1039
+* Add support to the LLM eval class in Accuracy Category. by @chakravarthik27 in https://github.com/Pacific-AI-Corp/langtest/pull/1053
+* feat: Add SafetyTestFactory and Misuse class for safety testing by @chakravarthik27 in https://github.com/Pacific-AI-Corp/langtest/pull/1040
+* Fix/alignment issues in bias tests for ner task by @chakravarthik27 in https://github.com/Pacific-AI-Corp/langtest/pull/1060
+* Feature/integrate prometheus model for enhanced evaluation by @chakravarthik27 in https://github.com/Pacific-AI-Corp/langtest/pull/1055
+* chore: update dependencies by @chakravarthik27 in https://github.com/Pacific-AI-Corp/langtest/pull/1047
+* Feature/implement the generic to brand drug name swapping tests and vice versa by @chakravarthik27 in https://github.com/Pacific-AI-Corp/langtest/pull/1058
+* Fix/bugs from langtest 230rc1 by @chakravarthik27 in https://github.com/Pacific-AI-Corp/langtest/pull/1062
+* Fix/bugs from langtest 230rc2 by @chakravarthik27 in https://github.com/Pacific-AI-Corp/langtest/pull/1064
+* chore: adding notebooks and websites changes - 2.3.0 by @chakravarthik27 in https://github.com/Pacific-AI-Corp/langtest/pull/1063
+* Release/2.3.0 by @chakravarthik27 in https://github.com/Pacific-AI-Corp/langtest/pull/1065
 
 
-**Full Changelog**: https://github.com/JohnSnowLabs/langtest/compare/2.2.0...2.3.0
+**Full Changelog**: https://github.com/Pacific-AI-Corp/langtest/compare/2.2.0...2.3.0
 
 </div>
 {%- include docs-langtest-pagination.html -%}
