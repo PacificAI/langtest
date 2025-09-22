@@ -23,12 +23,12 @@ modify_date: 2023-08-11
 This test is specifically designed for Hugging Face fill-mask models like BERT, RoBERTa-base, and similar models. Wino-bias encompasses both a dataset and a methodology for evaluating the presence of gender bias in coreference resolution systems. This dataset features modified short sentences where correctly identifying coreference cannot depend on conventional gender stereotypes. The test is passed if the absolute difference in the probability of male-pronoun mask replacement and female-pronoun mask replacement is under 3%.
 
 ➤ Notebook Link:
-- [Wino-Bias](https://colab.research.google.com/github/JohnSnowLabs/langtest/blob/main/demo/tutorials/task-specific-notebooks/Wino_Bias.ipynb)
+- [Wino-Bias](https://colab.research.google.com/github/Pacific-AI-Corp/langtest/blob/main/demo/tutorials/task-specific-notebooks/Wino_Bias.ipynb)
 
 
 ➤ How the test looks ?
 
-![image](https://github.com/JohnSnowLabs/langtest/assets/71844877/9cf21d36-88bb-4f69-b80e-63a74261669f)
+![image](https://github.com/Pacific-AI-Corp/langtest/assets/71844877/9cf21d36-88bb-4f69-b80e-63a74261669f)
 
 
 
@@ -37,11 +37,11 @@ This test is specifically designed for Hugging Face fill-mask models like BERT, 
 The LegalSupport dataset evaluates fine-grained reverse entailment. Each sample consists of a text passage making a legal claim, and two case summaries. Each summary describes a legal conclusion reached by a different court. The task is to determine which case (i.e. legal conclusion) most forcefully and directly supports the legal claim in the passage. The construction of this benchmark leverages annotations derived from a legal taxonomy expliciting different levels of entailment (e.g. "directly supports" vs "indirectly supports"). As such, the benchmark tests a model's ability to reason regarding the strength of support a particular case summary provides.
 
 ➤ Notebook Link:
-- [Legal-Support](https://colab.research.google.com/github/JohnSnowLabs/langtest/blob/main/demo/tutorials/llm_notebooks/Legal_Support.ipynb)
+- [Legal-Support](https://colab.research.google.com/github/Pacific-AI-Corp/langtest/blob/main/demo/tutorials/llm_notebooks/Legal_Support.ipynb)
 
 ➤ How the test looks ?
 
-![image](https://github.com/JohnSnowLabs/langtest/assets/23481244/277d22e8-a819-4fc4-9a5c-a04dd45d16f8)
+![image](https://github.com/Pacific-AI-Corp/langtest/assets/23481244/277d22e8-a819-4fc4-9a5c-a04dd45d16f8)
 
 
 ### Adding support for factuality test 
@@ -75,11 +75,11 @@ Accuracy is assessed by examining the "pass" column. If "pass" is marked as **Tr
 
 
 ➤ Notebook Link:
-- [Factuality Test](https://github.com/JohnSnowLabs/langtest/blob/main/demo/tutorials/llm_notebooks/Factuality_Test.ipynb)
+- [Factuality Test](https://github.com/Pacific-AI-Corp/langtest/blob/main/demo/tutorials/llm_notebooks/Factuality_Test.ipynb)
 
 ➤ How the test looks ?
 
-![image](https://github.com/JohnSnowLabs/langtest/assets/101416953/1ceed67b-62e6-4751-9d6a-0a666a12e2d7)
+![image](https://github.com/Pacific-AI-Corp/langtest/assets/101416953/1ceed67b-62e6-4751-9d6a-0a666a12e2d7)
 
 
 
@@ -101,14 +101,14 @@ By following these steps, we can gauge the model's sensitivity to negations and 
 
 
 ➤ Notebook Link:
-- [Sensitivity Notebook](https://colab.research.google.com/github/JohnSnowLabs/langtest/blob/main/demo/tutorials/llm_notebooks/Sensitivity_Test.ipynb)
+- [Sensitivity Notebook](https://colab.research.google.com/github/Pacific-AI-Corp/langtest/blob/main/demo/tutorials/llm_notebooks/Sensitivity_Test.ipynb)
 
 ➤ How the test looks ?
 
 
 We have used threshold of (-0.1,0.1) . If the eval_score falls within this threshold range, it indicates that the model is failing to properly handle negations, implying insensitivity to linguistic nuances introduced by negation words.
 
-![image](https://github.com/JohnSnowLabs/langtest/assets/71117423/11293d3d-7fe4-406d-b7d4-ec9a9f12df4d)
+![image](https://github.com/Pacific-AI-Corp/langtest/assets/71117423/11293d3d-7fe4-406d-b7d4-ec9a9f12df4d)
 
 
 ### Adding support for legal-summarization test
@@ -121,13 +121,13 @@ We have used threshold of (-0.1,0.1) . If the eval_score falls within this thres
 The Multi-LexSum dataset consists of legal case summaries. The aim is for the model to thoroughly examine the given context and, upon understanding its content, produce a concise summary that captures the essential themes and key details.
 
 ➤ Notebook Link:
-- [Legal Summarization](https://github.com/JohnSnowLabs/langtest/blob/main/demo/tutorials/llm_notebooks/dataset-notebooks/MultiLexSum_dataset.ipynb)
+- [Legal Summarization](https://github.com/Pacific-AI-Corp/langtest/blob/main/demo/tutorials/llm_notebooks/dataset-notebooks/MultiLexSum_dataset.ipynb)
 
 ➤ How the test looks ?
 
 The default threshold value is 0.50. If the eval_score is higher than threshold, then the "pass" will be as true.
 
-![image](https://github.com/JohnSnowLabs/langtest/assets/101416953/2a07f977-002c-43ce-be87-cf866d88eb92)
+![image](https://github.com/Pacific-AI-Corp/langtest/assets/101416953/2a07f977-002c-43ce-be87-cf866d88eb92)
 
 ## 🐛 Bug Fixes
 

@@ -17,11 +17,11 @@ sys.path.insert(0, os.path.abspath('..'))
 # -- Project information -----------------------------------------------------
 
 project = 'langtest'
-copyright = '2023, John Snow Labs'
-author = 'John Snow Labs'
+copyright = '2025, Pacific AI'
+author = 'Pacific AI'
 
 # The full version, including alpha/beta/rc tags
-release = '1.1.0'
+release = '2.7.0'
 
 
 # -- General configuration ---------------------------------------------------
@@ -68,7 +68,7 @@ html_theme_options = {
             # Label for this link
             "name": "GitHub",
             # URL where the link will redirect
-            "url": "https://github.com/JohnSnowLabs/langtest",  # required
+            "url": "https://github.com/Pacific-AI-Corp/langtest",  # required
             # Icon class (if "type": "fontawesome"), or path to local image (if "type": "local")
             "icon": "fa-brands fa-square-github",
             # The type of image to be used (see below for details)

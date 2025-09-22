@@ -102,7 +102,7 @@ class FairnessTestFactory(ITests):
             raw_data (List[Sample]): The raw dataset.
 
         """
-        raw_data_copy = [x.copy() for x in raw_data]
+        raw_data_copy = [x.model_copy() for x in raw_data]
         grouped_label = {}
         grouped_data = cls.get_gendered_data(raw_data_copy)
         for gender, data in grouped_data.items():
@@ -228,9 +228,11 @@ class FairnessTestFactory(ITests):
 
                 if kwargs["is_default"]:
                     y_pred = y_pred.apply(
-                        lambda x: "1"
-                        if x in ["pos", "LABEL_1", "POS"]
-                        else ("0" if x in ["neg", "LABEL_0", "NEG"] else x)
+                        lambda x: (
+                            "1"
+                            if x in ["pos", "LABEL_1", "POS"]
+                            else ("0" if x in ["neg", "LABEL_0", "NEG"] else x)
+                        )
                     )
 
                 grouped_label[gender] = [y_true, y_pred]

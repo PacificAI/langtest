@@ -31,7 +31,7 @@ John Snow Labs is excited to announce the release of LangTest 2.2.0! This update
 ## 🔥 Key Enhancements:
 
 ### **🏆 Comprehensive Model Ranking & Leaderboard**
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/JohnSnowLabs/langtest/blob/main/demo/tutorials/benchmarks/Benchmarking_with_Harness.ipynb)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Pacific-AI-Corp/langtest/blob/main/demo/tutorials/benchmarks/Benchmarking_with_Harness.ipynb)
 The new Model Ranking & Leaderboard system offers a comprehensive way to evaluate and compare model performance based on various metrics across different datasets. This feature allows users to rank models, retain historical rankings, and analyze performance trends.
 
 **Key Features:**
@@ -93,7 +93,7 @@ harness = Harness(
 ```python
 harness.generate().run().report()
 ```
-![image](https://github.com/JohnSnowLabs/langtest/assets/23481244/d8055592-5501-4139-ad90-55baa4fecbfc)
+![image](https://github.com/Pacific-AI-Corp/langtest/assets/23481244/d8055592-5501-4139-ad90-55baa4fecbfc)
 
 **3**. Similarly, do the same steps for the `google/flan-t5-large` model with the same `save_dir` path for benchmarking and the same `config.yaml`
 
@@ -101,14 +101,14 @@ harness.generate().run().report()
 ```python
 harness.get_leaderboard()
 ```
-![image](https://github.com/JohnSnowLabs/langtest/assets/23481244/ff741d8e-4fc0-4f94-bcc3-9c67653aaba8)
+![image](https://github.com/Pacific-AI-Corp/langtest/assets/23481244/ff741d8e-4fc0-4f94-bcc3-9c67653aaba8)
 
 **Conclusion:**
 The Model Ranking & Leaderboard system provides a robust and structured method for evaluating and comparing models across multiple datasets, enabling users to make data-driven decisions and continuously improve model performance.
 
 
 ### **🔍 Efficient Few-Shot Model Evaluation**
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/JohnSnowLabs/langtest/blob/main/demo/tutorials/llm_notebooks/Fewshot_QA_Notebook.ipynb)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Pacific-AI-Corp/langtest/blob/main/demo/tutorials/llm_notebooks/Fewshot_QA_Notebook.ipynb)
 Few-Shot Model Evaluation optimizes and evaluates model performance using minimal data. This feature provides rapid insights into model capabilities, enabling efficient assessment and optimization with limited examples.
 
 **Key Features:**
@@ -182,14 +182,14 @@ harness = Harness(
 ```python
 harness.generate().run().report()
 ```
-![image](https://github.com/JohnSnowLabs/langtest/assets/23481244/4bae4008-621c-4d1c-a303-218f9df2700d)
+![image](https://github.com/Pacific-AI-Corp/langtest/assets/23481244/4bae4008-621c-4d1c-a303-218f9df2700d)
 
 **Conclusion:**
 Few-Shot Model Evaluation provides valuable insights into model capabilities with minimal data, allowing for rapid and effective performance optimization. This feature ensures that models can be assessed and improved efficiently, even with limited examples.
 
 
 ### **📊 Evaluating NER in LLMs**
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/JohnSnowLabs/langtest/blob/main/demo/tutorials/llm_notebooks/NER%20Casual%20LLM.ipynb)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Pacific-AI-Corp/langtest/blob/main/demo/tutorials/llm_notebooks/NER%20Casual%20LLM.ipynb)
 Evaluating NER in LLMs enables precise extraction and evaluation of entities using Large Language Models (LLMs). This feature enhances the capability to assess LLM performance on Named Entity Recognition tasks.
 
 **Key Features:**
@@ -234,17 +234,17 @@ harness = Harness(task="ner",
 ```python
 harness.generate().run().report()
 ```
-![image](https://github.com/JohnSnowLabs/langtest/assets/23481244/9435fa17-d3f7-4d47-934c-4cd483b11a53)
+![image](https://github.com/Pacific-AI-Corp/langtest/assets/23481244/9435fa17-d3f7-4d47-934c-4cd483b11a53)
 
 Examples:
-![image](https://github.com/JohnSnowLabs/langtest/assets/23481244/2ceb3390-9f07-4b17-b9e7-b32504ad1afe)
+![image](https://github.com/Pacific-AI-Corp/langtest/assets/23481244/2ceb3390-9f07-4b17-b9e7-b32504ad1afe)
 
 **Conclusion:**
 Evaluating NER in LLMs allows for accurate entity extraction and performance assessment using LangTest's comprehensive evaluation methods. This feature ensures thorough and reliable evaluation of LLMs on Named Entity Recognition tasks.
 
 
 ### **🚀 Enhanced Data Augmentation**
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/JohnSnowLabs/langtest/blob/main/demo/tutorials/misc/Data_Augmenter_Notebook.ipynb)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Pacific-AI-Corp/langtest/blob/main/demo/tutorials/misc/Data_Augmenter_Notebook.ipynb)
 Enhanced Data Augmentation introduces a new `DataAugmenter` class, enabling streamlined and harness-free data augmentation. This feature simplifies the process of enriching datasets to improve model robustness and performance.
 
 **Key Features:**
@@ -293,7 +293,7 @@ Enhanced Data Augmentation capabilities in LangTest ensure that your models are 
 
 
 ### **🎯Multi-Dataset Prompts**
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/JohnSnowLabs/langtest/blob/main/demo/tutorials/misc/MultiPrompt_MultiDataset.ipynb)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Pacific-AI-Corp/langtest/blob/main/demo/tutorials/misc/MultiPrompt_MultiDataset.ipynb)
 Multi-Dataset Prompts streamline the process of integrating and testing various data sources by allowing users to define custom prompts for each dataset. This enhancement ensures efficient prompt handling across multiple datasets, enabling comprehensive performance evaluations.
 
 **Key Features:**
@@ -344,7 +344,7 @@ harness.configure(
 ```python
 harness.generate().run().report()
 ```
-![image](https://github.com/JohnSnowLabs/langtest/assets/23481244/a961d98d-a229-439e-a9eb-92395dde6f62)
+![image](https://github.com/Pacific-AI-Corp/langtest/assets/23481244/a961d98d-a229-439e-a9eb-92395dde6f62)
 
 **Conclusion:**
 Multi-dataset prompts in LangTest empower users to efficiently manage and test multiple data sources, resulting in more effective and comprehensive language model evaluations.
@@ -354,11 +354,11 @@ Multi-dataset prompts in LangTest empower users to efficiently manage and test m
 {:.table2}
 | Notebooks          | Colab Link |
 |--------------------|-------------|
-| Model Ranking & Leaderboard       | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/JohnSnowLabs/langtest/blob/main/demo/tutorials/benchmarks/Benchmarking_with_Harness.ipynb)|
-| Fewshot Model Evaluation     | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/JohnSnowLabs/langtest/blob/main/demo/tutorials/llm_notebooks/Fewshot_QA_Notebook.ipynb) |
-| Evaluating NER in LLMs    | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/JohnSnowLabs/langtest/blob/main/demo/tutorials/llm_notebooks/NER%20Casual%20LLM.ipynb) |
-| Data Augmenter    | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/JohnSnowLabs/langtest/blob/main/demo/tutorials/misc/Data_Augmenter_Notebook.ipynb) |
-| Multi-Dataset Prompts   | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/JohnSnowLabs/langtest/blob/main/demo/tutorials/misc/MultiPrompt_MultiDataset.ipynb) |
+| Model Ranking & Leaderboard       | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Pacific-AI-Corp/langtest/blob/main/demo/tutorials/benchmarks/Benchmarking_with_Harness.ipynb)|
+| Fewshot Model Evaluation     | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Pacific-AI-Corp/langtest/blob/main/demo/tutorials/llm_notebooks/Fewshot_QA_Notebook.ipynb) |
+| Evaluating NER in LLMs    | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Pacific-AI-Corp/langtest/blob/main/demo/tutorials/llm_notebooks/NER%20Casual%20LLM.ipynb) |
+| Data Augmenter    | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Pacific-AI-Corp/langtest/blob/main/demo/tutorials/misc/Data_Augmenter_Notebook.ipynb) |
+| Multi-Dataset Prompts   | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Pacific-AI-Corp/langtest/blob/main/demo/tutorials/misc/MultiPrompt_MultiDataset.ipynb) |
 
 
 ## 🐛 Fixes
@@ -372,23 +372,23 @@ Multi-dataset prompts in LangTest empower users to efficiently manage and test m
 - Code Organization and Readability in Augmentation Module [#1025]
 
 ## What's Changed
-* User prompt handling for multi-dataset testing by @chakravarthik27 in https://github.com/JohnSnowLabs/langtest/pull/1010
-* Bug fix/performance tests by @chakravarthik27 in https://github.com/JohnSnowLabs/langtest/pull/1015
-* NER task support for casuallm models from huggingface, web, and lm-studio by @chakravarthik27 in https://github.com/JohnSnowLabs/langtest/pull/1009
-* `random_age` Class not returning test cases by @chakravarthik27 in https://github.com/JohnSnowLabs/langtest/pull/1020
-* Feature/data augmentation allow access without harness testing by @chakravarthik27 in https://github.com/JohnSnowLabs/langtest/pull/1016
-* Improvements/load and save benchmark report by @chakravarthik27 in https://github.com/JohnSnowLabs/langtest/pull/1012
-* Refactor: Improved the `import_edited_testcases()` functionality in Harness. by @chakravarthik27 in https://github.com/JohnSnowLabs/langtest/pull/1022
-* Implementation of prompt techniques by @chakravarthik27 in https://github.com/JohnSnowLabs/langtest/pull/1018
-* Fix: Summary class to update summary dataframe and handle file path by @chakravarthik27 in https://github.com/JohnSnowLabs/langtest/pull/1024
-* Refactor: Improve Code Organization and Readability by @chakravarthik27 in https://github.com/JohnSnowLabs/langtest/pull/1025
-* Improved: `rank_by` argument add to `harness.get_leaderboard()` by @chakravarthik27 in https://github.com/JohnSnowLabs/langtest/pull/1027
-* website updates by @chakravarthik27 in https://github.com/JohnSnowLabs/langtest/pull/1023
-* updated: langtest version in pip by @chakravarthik27 in https://github.com/JohnSnowLabs/langtest/pull/1028
-* Release/2.2.0 by @chakravarthik27 in https://github.com/JohnSnowLabs/langtest/pull/1029
+* User prompt handling for multi-dataset testing by @chakravarthik27 in https://github.com/Pacific-AI-Corp/langtest/pull/1010
+* Bug fix/performance tests by @chakravarthik27 in https://github.com/Pacific-AI-Corp/langtest/pull/1015
+* NER task support for casuallm models from huggingface, web, and lm-studio by @chakravarthik27 in https://github.com/Pacific-AI-Corp/langtest/pull/1009
+* `random_age` Class not returning test cases by @chakravarthik27 in https://github.com/Pacific-AI-Corp/langtest/pull/1020
+* Feature/data augmentation allow access without harness testing by @chakravarthik27 in https://github.com/Pacific-AI-Corp/langtest/pull/1016
+* Improvements/load and save benchmark report by @chakravarthik27 in https://github.com/Pacific-AI-Corp/langtest/pull/1012
+* Refactor: Improved the `import_edited_testcases()` functionality in Harness. by @chakravarthik27 in https://github.com/Pacific-AI-Corp/langtest/pull/1022
+* Implementation of prompt techniques by @chakravarthik27 in https://github.com/Pacific-AI-Corp/langtest/pull/1018
+* Fix: Summary class to update summary dataframe and handle file path by @chakravarthik27 in https://github.com/Pacific-AI-Corp/langtest/pull/1024
+* Refactor: Improve Code Organization and Readability by @chakravarthik27 in https://github.com/Pacific-AI-Corp/langtest/pull/1025
+* Improved: `rank_by` argument add to `harness.get_leaderboard()` by @chakravarthik27 in https://github.com/Pacific-AI-Corp/langtest/pull/1027
+* website updates by @chakravarthik27 in https://github.com/Pacific-AI-Corp/langtest/pull/1023
+* updated: langtest version in pip by @chakravarthik27 in https://github.com/Pacific-AI-Corp/langtest/pull/1028
+* Release/2.2.0 by @chakravarthik27 in https://github.com/Pacific-AI-Corp/langtest/pull/1029
 
 
-**Full Changelog**: https://github.com/JohnSnowLabs/langtest/compare/2.1.0...2.2.0
+**Full Changelog**: https://github.com/Pacific-AI-Corp/langtest/compare/2.1.0...2.2.0
 
 </div>
 {%- include docs-langtest-pagination.html -%}

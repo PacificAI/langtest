@@ -34,23 +34,23 @@ A heartfelt thank you to our unwavering community for consistently fueling our j
 - [PIQA](https://arxiv.org/abs/1911.11641) - The PIQA dataset is designed to address the challenging task of reasoning about physical commonsense in natural language. It presents a collection of multiple-choice questions in English, where each question involves everyday situations and requires selecting the most appropriate solution from two choices.
 
 ➤ Notebook Link:
-- [CommonSenseQA](https://github.com/JohnSnowLabs/langtest/blob/main/demo/tutorials/llm_notebooks/dataset-notebooks/CommonsenseQA_dataset.ipynb)
+- [CommonSenseQA](https://github.com/Pacific-AI-Corp/langtest/blob/main/demo/tutorials/llm_notebooks/dataset-notebooks/CommonsenseQA_dataset.ipynb)
 
-- [SIQA](https://github.com/JohnSnowLabs/langtest/blob/main/demo/tutorials/llm_notebooks/dataset-notebooks/SIQA_dataset.ipynb)
+- [SIQA](https://github.com/Pacific-AI-Corp/langtest/blob/main/demo/tutorials/llm_notebooks/dataset-notebooks/SIQA_dataset.ipynb)
 
-- [PIQA](https://github.com/JohnSnowLabs/langtest/blob/main/demo/tutorials/llm_notebooks/dataset-notebooks/PIQA_dataset.ipynb)
+- [PIQA](https://github.com/Pacific-AI-Corp/langtest/blob/main/demo/tutorials/llm_notebooks/dataset-notebooks/PIQA_dataset.ipynb)
 
 
 ➤ How the test looks ?
 
 - CommonsenseQA
-![image](https://github.com/JohnSnowLabs/langtest/assets/101416953/5bd93171-92ba-4dee-8152-55ad596cb548)
+![image](https://github.com/Pacific-AI-Corp/langtest/assets/101416953/5bd93171-92ba-4dee-8152-55ad596cb548)
 
 - SIQA
-![image](https://github.com/JohnSnowLabs/langtest/assets/101416953/8c5d70cb-01ff-49df-920e-f76bad3feeed)
+![image](https://github.com/Pacific-AI-Corp/langtest/assets/101416953/8c5d70cb-01ff-49df-920e-f76bad3feeed)
 
 - PIQA
-![image](https://github.com/JohnSnowLabs/langtest/assets/101416953/fc2a51d6-267f-49f8-a828-30eae5309e29)
+![image](https://github.com/Pacific-AI-Corp/langtest/assets/101416953/fc2a51d6-267f-49f8-a828-30eae5309e29)
 </div><div class="h3-box" markdown="1">
 
 ### Adding support for toxicity sensitivity 
@@ -90,10 +90,10 @@ If the evaluation score is greater than 0, the test result is `False`, indicatin
 By following these steps, we can gauge the model's sensitivity to toxic words and assess whether it refrain itself to provide toxic words in the output.
 
 ➤ Notebook Link:
-- [Tutorial](https://github.com/JohnSnowLabs/langtest/blob/main/demo/tutorials/llm_notebooks/Sensitivity_Test.ipynb)
+- [Tutorial](https://github.com/Pacific-AI-Corp/langtest/blob/main/demo/tutorials/llm_notebooks/Sensitivity_Test.ipynb)
 
 ➤ How the test looks ?
-![image](https://github.com/JohnSnowLabs/langtest/assets/71844877/01c43a69-fbef-46ff-a875-884e5b716e4b)
+![image](https://github.com/Pacific-AI-Corp/langtest/assets/71844877/01c43a69-fbef-46ff-a875-884e5b716e4b)
 
 
 ###  Adding support for legal-qa datasets (Consumer Contracts, Privacy-Policy, Contracts-QA) 
@@ -108,18 +108,18 @@ Adding 3 legal-QA-datasets from the [legalbench ](https://github.com/HazyResearc
 
 
 ➤ Notebook Link:
-- [LegalQA_Datasets](https://github.com/JohnSnowLabs/langtest/blob/release/1.6.0/demo/tutorials/llm_notebooks/dataset-notebooks/LegalQA_Datasets.ipynb)
+- [LegalQA_Datasets](https://github.com/Pacific-AI-Corp/langtest/blob/release/1.6.0/demo/tutorials/llm_notebooks/dataset-notebooks/LegalQA_Datasets.ipynb)
 
 
 ➤ How the test looks ?
 #### Consumer Contracts:
-![image](https://github.com/JohnSnowLabs/langtest/assets/71844877/00525e3f-9670-4dd3-bc1c-86817c407e4e)
+![image](https://github.com/Pacific-AI-Corp/langtest/assets/71844877/00525e3f-9670-4dd3-bc1c-86817c407e4e)
 
 #### Privacy Policy:
-![image](https://github.com/JohnSnowLabs/langtest/assets/71844877/dafe86bd-a788-4829-aa80-6b5455ce9762)
+![image](https://github.com/Pacific-AI-Corp/langtest/assets/71844877/dafe86bd-a788-4829-aa80-6b5455ce9762)
 
 #### Contracts-QA:
-![image](https://github.com/JohnSnowLabs/langtest/assets/71844877/5ea3d588-f074-4bb4-a18f-a826b348f382)
+![image](https://github.com/Pacific-AI-Corp/langtest/assets/71844877/5ea3d588-f074-4bb4-a18f-a826b348f382)
 
 
 ### Adding support for Crows-Pairs common stereotype test
@@ -127,12 +127,12 @@ Adding 3 legal-QA-datasets from the [legalbench ](https://github.com/HazyResearc
 This test uses a masked sentence and two tokens to decide whether the model has bias for/against one choice. 
 
 ➤ Notebook Link:
-- [Crows-Pairs](https://github.com/JohnSnowLabs/langtest/blob/main/demo/tutorials/task-specific-notebooks/Crows_Pairs_Notebook.ipynb)
+- [Crows-Pairs](https://github.com/Pacific-AI-Corp/langtest/blob/main/demo/tutorials/task-specific-notebooks/Crows_Pairs_Notebook.ipynb)
 
 
 ➤ How the test looks ?
 
-<img width="653" alt="image" src="https://github.com/JohnSnowLabs/langtest/assets/71844877/f946cbd3-e409-467b-9a98-f91c80d3875e">
+<img width="653" alt="image" src="https://github.com/Pacific-AI-Corp/langtest/assets/71844877/f946cbd3-e409-467b-9a98-f91c80d3875e">
 
 
 
@@ -201,24 +201,24 @@ The evaluation process for synthetic NLP data involves comparing the model's res
 
 
 ➤ Notebook Link:
-- [Sycophancy ](https://github.com/JohnSnowLabs/langtest/blob/aa91cd93dbf30f68af38abe926d66a5bc87d541b/demo/tutorials/llm_notebooks/Sycophancy_test.ipynb)
+- [Sycophancy ](https://github.com/Pacific-AI-Corp/langtest/blob/aa91cd93dbf30f68af38abe926d66a5bc87d541b/demo/tutorials/llm_notebooks/Sycophancy_test.ipynb)
 
 
 ➤ How the test looks ?
 #### Synthetic Math Data (Evaluation with Ground Truth)
 
-![image](https://github.com/JohnSnowLabs/langtest/assets/71117423/02a7a380-a1de-4fba-b544-ab7f9edd1392)
+![image](https://github.com/Pacific-AI-Corp/langtest/assets/71117423/02a7a380-a1de-4fba-b544-ab7f9edd1392)
 #### Synthetic Math Data (Evaluation without Ground Truth)
 
-![image](https://github.com/JohnSnowLabs/langtest/assets/71117423/6b37e1c5-46b9-44a4-a4fd-ca2af2487254)
+![image](https://github.com/Pacific-AI-Corp/langtest/assets/71117423/6b37e1c5-46b9-44a4-a4fd-ca2af2487254)
 
 #### Synthetic nlp Data (Evaluation with Ground Truth)
 
-![image](https://github.com/JohnSnowLabs/langtest/assets/71117423/4bc9ed1f-082a-4feb-95d8-db9f369b3ed4)
+![image](https://github.com/Pacific-AI-Corp/langtest/assets/71117423/4bc9ed1f-082a-4feb-95d8-db9f369b3ed4)
 
 #### Synthetic nlp Data (Evaluation without Ground Truth)
 
-![image](https://github.com/JohnSnowLabs/langtest/assets/71117423/a6d9b49e-ca5a-4f98-ac1a-0df86750171d)
+![image](https://github.com/Pacific-AI-Corp/langtest/assets/71117423/a6d9b49e-ca5a-4f98-ac1a-0df86750171d)
 
 ## 📝 BlogPosts
 

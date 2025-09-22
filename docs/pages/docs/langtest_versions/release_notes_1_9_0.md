@@ -33,7 +33,7 @@ We're excited to announce the latest release of LangTest, featuring significant 
 ##  🔥 Key Enhancements:
 
 ### 🤗 Hugging Face Callback Integration
- [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/JohnSnowLabs/langtest/blob/main/demo/tutorials/misc/HF_Callback_NER.ipynb)     
+ [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Pacific-AI-Corp/langtest/blob/main/demo/tutorials/misc/HF_Callback_NER.ipynb)     
 We introduced the callback class for utilization in transformers model training. Callbacks in transformers are entities that can tailor the training loop's behavior within the PyTorch or Keras Trainer. These callbacks have the ability to examine the training loop state, make decisions (such as early stopping), or execute actions (including logging, saving, or evaluation). LangTest effectively leverages this capability by incorporating an automatic testing callback. This class is both flexible and adaptable, seamlessly integrating with any transformers model for a customized experience.
 
 Create a callback instance with one line and then use it in the callbacks of trainer:
@@ -55,11 +55,11 @@ trainer = Trainer(..., callbacks=[my_callback])
 </div><div class="h3-box" markdown="1">
 
 ### 🚀 Enhanced Templatic Augmentation with Automated Sample Generation
- [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/JohnSnowLabs/langtest/blob/main/demo/tutorials/misc/Templatic_Augmentation_Notebook.ipynb)     
+ [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Pacific-AI-Corp/langtest/blob/main/demo/tutorials/misc/Templatic_Augmentation_Notebook.ipynb)     
 
 Users can now enable the automatic generation of sample templates by setting generate_templates to True. This feature utilizes the advanced capabilities of LLMs to create structured templates that can be used for templatic augmentation.To ensure quality and relevance, users can review the generated templates by setting show_templates to True. 
 
-![image](https://github.com/JohnSnowLabs/langtest/assets/71844877/1ca52964-7ad2-4778-a76e-642c425b1c13)
+![image](https://github.com/Pacific-AI-Corp/langtest/assets/71844877/1ca52964-7ad2-4778-a76e-642c425b1c13)
 
 ###  🚀 Benchmarking Different Models
 
@@ -76,7 +76,7 @@ We focused on extracting clinical subsets from the MMLU dataset, creating a spec
 |------------|-----------|------------------------------------------------------|----------------------------------------------------|------------------|---------------|------|
 | robustness | uppercase | Fatty acids are transported into the mitochondria bound to:\nA. thiokinase. B. coenzyme A (CoA). C. acetyl-CoA. D. carnitine. | FATTY ACIDS ARE TRANSPORTED INTO THE MITOCHONDRIA BOUND TO: A. THIOKINASE. B. COENZYME A (COA). C. ACETYL-COA. D. CARNITINE. | D. carnitine.                | B. COENZYME A (COA).             | False |
 
-![mmlu](https://github.com/JohnSnowLabs/langtest/assets/71117423/ef056c0b-76dd-4dc1-b201-f6d97b880d1f)
+![mmlu](https://github.com/Pacific-AI-Corp/langtest/assets/71117423/ef056c0b-76dd-4dc1-b201-f6d97b880d1f)
 
 
 #### OpenBookQA
@@ -93,7 +93,7 @@ each with four answer choices and one correct answer. The questions cover variou
 
 
 
-![openbook1](https://github.com/JohnSnowLabs/langtest/assets/101416953/fcc6a1d3-2b8b-444f-b4fc-4ced0d9ecd60)
+![openbook1](https://github.com/Pacific-AI-Corp/langtest/assets/101416953/fcc6a1d3-2b8b-444f-b4fc-4ced0d9ecd60)
 
 #### MedMCQA
 
@@ -106,7 +106,7 @@ The MedMCQA is a large-scale benchmark dataset of Multiple-Choice Question Answe
 |------------|-----------|------------------------------------------------------|----------------------------------------------------|------------------|---------------|------|
 | robustness | uppercase | Most common site of direct hernia\nA. Hesselbach's triangle\nB. Femoral gland\nC. No site predilection\nD. nan | MOST COMMON SITE OF DIRECT HERNIA A. HESSELBACH'S TRIANGLE B. FEMORAL GLAND C. NO SITE PREDILECTION D. NAN | A                | A             | True |
 
-![medmcq](https://github.com/JohnSnowLabs/langtest/assets/101416953/b155fc64-308b-4a80-bc78-68afe37e3933)
+![medmcq](https://github.com/Pacific-AI-Corp/langtest/assets/101416953/b155fc64-308b-4a80-bc78-68afe37e3933)
 **Dataset info:**
 - subset: MedMCQA-Test
 - Split: Medicine, Anatomy, Forensic_Medicine, Microbiology, Pathology, Anaesthesia, Pediatrics, Physiology, Biochemistry, Gynaecology_Obstetrics, Skin, Surgery, Radiology
@@ -126,7 +126,7 @@ The MedQA is a benchmark dataset of Multiple choice question answering based on 
 
 
 
-![medqa](https://github.com/JohnSnowLabs/langtest/assets/101416953/3e486804-b184-43cd-ab8e-5289987f2db9)
+![medqa](https://github.com/Pacific-AI-Corp/langtest/assets/101416953/3e486804-b184-43cd-ab8e-5289987f2db9)
 
 ## 🚀 Community Contributions:
 

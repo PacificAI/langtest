@@ -8,10 +8,10 @@ permalink: /docs/pages/docs/contribute
 modify_date: "2019-05-16"
 ---
 
-We're thrilled that you're interested in contributing to our project. Your contributions can make a significant impact, and we appreciate your support in making [LangTest](https://github.com/JohnSnowLabs/langtest) even better. 
+We're thrilled that you're interested in contributing to our project. Your contributions can make a significant impact, and we appreciate your support in making [LangTest](https://github.com/Pacific-AI-Corp/langtest) even better. 
 Imagine you've identified an area in LangTest that could use improvement or a new feature. Here's a step-by-step guide on how to make a valid contribution:
 
-Prior to proceeding, ensure that you have meticulously reviewed each step outlined in the [Contribution file](https://github.com/JohnSnowLabs/langtest/blob/add-onboarding-materials/CONTRIBUTING.md). This preparation will equip you with the necessary knowledge to confidently make changes within your designated branch.
+Prior to proceeding, ensure that you have meticulously reviewed each step outlined in the [Contribution file](https://github.com/Pacific-AI-Corp/langtest/blob/add-onboarding-materials/CONTRIBUTING.md). This preparation will equip you with the necessary knowledge to confidently make changes within your designated branch.
 
 > Let's suppose you're eager to add a robustness test.
 

@@ -37,7 +37,7 @@ We're thrilled to announce the latest release of LangTest, introducing remarkabl
 ##  🔥 Key Enhancements:
 
 ### 🚀Implementing and Evaluating RAG with LlamaIndex and Langtest
- [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://github.com/JohnSnowLabs/langtest/blob/main/demo/tutorials/RAG/RAG_OpenAI.ipynb)   
+ [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://github.com/Pacific-AI-Corp/langtest/blob/main/demo/tutorials/RAG/RAG_OpenAI.ipynb)   
 
 LangTest seamlessly integrates LlamaIndex, focusing on two main aspects: constructing the RAG with LlamaIndex and evaluating its performance. The integration involves utilizing LlamaIndex's generate_question_context_pairs module to create relevant question and context pairs, forming the foundation for retrieval and response evaluation in the RAG system.
 
@@ -60,7 +60,7 @@ retriever_evaluator.display_results()
 ```
 
 ### 📚Grammar Testing in Evaluating and Enhancing NLP Models
- [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://github.com/JohnSnowLabs/langtest/blob/main/demo/tutorials/test-specific-notebooks/Grammar_Demo.ipynb)   
+ [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://github.com/Pacific-AI-Corp/langtest/blob/main/demo/tutorials/test-specific-notebooks/Grammar_Demo.ipynb)   
 
 Grammar Testing is a key feature in LangTest's suite of evaluation strategies, emphasizing the assessment of a language model's proficiency in contextual understanding and nuance interpretation. By creating test cases that paraphrase original sentences, the goal is to gauge the model's ability to comprehend and interpret text, thereby enriching insights into its contextual mastery.
 
@@ -70,7 +70,7 @@ Grammar Testing is a key feature in LangTest's suite of evaluation strategies, e
 | grammar  | paraphrase | This program was on for a brief period when I was a kid, I remember watching it whilst eating fish and chips.<br /><br />Riding on the back of the Tron hype this series was much in the style of streethawk, manimal and the like, except more computery. There was a geeky kid who's computer somehow created this guy - automan. He'd go around solving crimes and the lot.<br /><br />All I really remember was his fancy car and the little flashy cursor thing that used to draw the car and help him out generally.<br /><br />When I mention it to anyone they can remember very little too. Was it real or maybe a dream? | I remember watching a show from my youth that had a Tron theme, with a nerdy kid driving around with a little flashy cursor and solving everyday problems. Was it a genuine story or a mere dream come true? | NEGATIVE         | POSITIVE      | false |
 
 ### 🔥 Saving and Loading the Checkpoints
- [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/JohnSnowLabs/langtest/blob/main/demo/tutorials/misc/Saving_Checkpoints.ipynb)     
+ [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Pacific-AI-Corp/langtest/blob/main/demo/tutorials/misc/Saving_Checkpoints.ipynb)     
 Introducing a robust checkpointing system in LangTest! The `run` method in the `Harness` class now supports checkpointing, allowing users to save intermediate results, manage batch processing, and specify a directory for storing checkpoints and results. This feature ensures data integrity, providing a mechanism for recovering progress in case of interruptions or task failures.
 ```
 harness.run(checkpoint=True, batch_size=20,save_checkpoints_dir="imdb-checkpoint")
@@ -121,7 +121,7 @@ HealthSearchQA, a new free-response dataset of medical questions sought online, 
 
 Users can effortlessly pass any Hugging Face model object into the LangTest harness and run a variety of tasks. This feature streamlines the process of evaluating and comparing different models, making it easier for users to leverage LangTest's comprehensive suite of tools with the wide array of models available on Hugging Face.
 
-![image](https://github.com/JohnSnowLabs/langtest/assets/71844877/adef09b7-e33d-42ec-86f3-a96dea85387e)
+![image](https://github.com/Pacific-AI-Corp/langtest/assets/71844877/adef09b7-e33d-42ec-86f3-a96dea85387e)
 
 
 ## 🚀 New LangTest Blogs:

@@ -203,3 +203,5 @@ tst_shortcut_sd/
 src/*/resources/*.classes
 
 _site/
+mlruns
+.venv_doc/

@@ -37,21 +37,21 @@ We added some of the subsets to our library:
     4. Casual Judgement
 
 ➤ Notebook Links:
-- [BigBench](https://github.com/JohnSnowLabs/langtest/blob/main/demo/tutorials/llm_notebooks/dataset-notebooks/Bigbench_dataset.ipynb)
-- [LogiQA](https://github.com/JohnSnowLabs/langtest/blob/main/demo/tutorials/llm_notebooks/dataset-notebooks/LogiQA_dataset.ipynb)
-- [asdiv](https://github.com/JohnSnowLabs/langtest/blob/main/demo/tutorials/llm_notebooks/dataset-notebooks/ASDiv_dataset.ipynb)
+- [BigBench](https://github.com/Pacific-AI-Corp/langtest/blob/main/demo/tutorials/llm_notebooks/dataset-notebooks/Bigbench_dataset.ipynb)
+- [LogiQA](https://github.com/Pacific-AI-Corp/langtest/blob/main/demo/tutorials/llm_notebooks/dataset-notebooks/LogiQA_dataset.ipynb)
+- [asdiv](https://github.com/Pacific-AI-Corp/langtest/blob/main/demo/tutorials/llm_notebooks/dataset-notebooks/ASDiv_dataset.ipynb)
 
 
 ➤ How the test looks ?
 
 #### LogiQA
-![image](https://github.com/JohnSnowLabs/langtest/assets/71117423/2f37f78d-0d2a-4d2b-a13d-f745212fa5f7)
+![image](https://github.com/Pacific-AI-Corp/langtest/assets/71117423/2f37f78d-0d2a-4d2b-a13d-f745212fa5f7)
 
 #### ASDiv
-![image](https://github.com/JohnSnowLabs/langtest/assets/71117423/56cd0426-15bf-43c4-922d-53da083a6500)
+![image](https://github.com/Pacific-AI-Corp/langtest/assets/71117423/56cd0426-15bf-43c4-922d-53da083a6500)
 
 #### BigBench
-![image](https://github.com/JohnSnowLabs/langtest/assets/71117423/f9473c43-f67c-4d39-9976-401e291a5065)
+![image](https://github.com/Pacific-AI-Corp/langtest/assets/71117423/f9473c43-f67c-4d39-9976-401e291a5065)
 
 
 
@@ -75,7 +75,7 @@ harness = Harness(
 
 At the end of running the test, we get a political compass report for the model like this:
 
-![image](https://github.com/JohnSnowLabs/langtest/assets/71844877/6443d1cc-2c9c-4eaa-bc9c-438190a2ab6e)
+![image](https://github.com/Pacific-AI-Corp/langtest/assets/71844877/6443d1cc-2c9c-4eaa-bc9c-438190a2ab6e)
 
 The test presents a grid with two axes, typically labeled as follows:
 
@@ -84,7 +84,7 @@ Economic Axis: This axis assesses a person's economic and fiscal views, ranging 
 Social Axis: This axis evaluates a person's social and cultural views, spanning from authoritarian (support for strong government control and traditional values) to libertarian (advocating personal freedoms, civil liberties, and social progressivism).
 
 Tutorial Notebook:
-[Political NB](https://colab.research.google.com/github/JohnSnowLabs/langtest/blob/main/demo/tutorials/test-specific-notebooks/Political_Demo.ipynb)
+[Political NB](https://colab.research.google.com/github/Pacific-AI-Corp/langtest/blob/main/demo/tutorials/test-specific-notebooks/Political_Demo.ipynb)
 
 
 #### Adding support for disinformation test 
@@ -95,7 +95,7 @@ The primary objective of this test is to assess the model's capability to genera
 - If the similarity scores exceed this threshold, It means the model is failing i.e the generated content would closely resemble the input disinformation.
 
 Tutorial Notebook:
-[Disinformation NB](https://github.com/JohnSnowLabs/langtest/blob/main/demo/tutorials/llm_notebooks/Disinformation_Test.ipynb)
+[Disinformation NB](https://github.com/Pacific-AI-Corp/langtest/blob/main/demo/tutorials/llm_notebooks/Disinformation_Test.ipynb)
 
 #### Usage
 ```
@@ -110,7 +110,7 @@ harness.generate().run().report()
 
 ➤ How the test looks ?
 
-![image](https://github.com/JohnSnowLabs/langtest/assets/71844877/cf0db42f-e6ed-4d44-877a-bb847cdd457f)
+![image](https://github.com/Pacific-AI-Corp/langtest/assets/71844877/cf0db42f-e6ed-4d44-877a-bb847cdd457f)
 
 
 ### Adding support for text generation HF models
@@ -121,15 +121,15 @@ It is intended to add the capability to locally deploy and assess text generatio
 #### Usage
 You can set the hub parameter to huggingface and choose any model from [HF model hub](https://huggingface.co/models?pipeline_tag=text-generation).
 
-![image](https://github.com/JohnSnowLabs/langtest/assets/33489812/222af396-9bd3-42f2-98f8-99235fcbeaf6)
+![image](https://github.com/Pacific-AI-Corp/langtest/assets/33489812/222af396-9bd3-42f2-98f8-99235fcbeaf6)
 
 ➤ How the test looks ?
 
-![image](https://github.com/JohnSnowLabs/langtest/assets/71844877/3cea254e-0317-43ea-8ba8-4b2496b32183)
+![image](https://github.com/Pacific-AI-Corp/langtest/assets/71844877/3cea254e-0317-43ea-8ba8-4b2496b32183)
 
 
 Tutorial Notebook:
-[Text Generation NB](https://colab.research.google.com/github/JohnSnowLabs/langtest/blob/main/demo/tutorials/llm_notebooks/HuggingFaceHub_QA_Summarization_Testing_Notebook.ipynb)
+[Text Generation NB](https://colab.research.google.com/github/Pacific-AI-Corp/langtest/blob/main/demo/tutorials/llm_notebooks/HuggingFaceHub_QA_Summarization_Testing_Notebook.ipynb)
 
 
 ## 📝 BlogPosts

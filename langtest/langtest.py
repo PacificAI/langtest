@@ -11,7 +11,8 @@ import pandas as pd
 import yaml
 import random
 
-from pkg_resources import resource_filename
+# from pkg_resources import resource_filename
+from importlib import resources
 
 from langtest.types import DatasetConfig, HarnessConfig, ModelConfig
 
@@ -158,10 +159,16 @@ class Harness:
             raise ValueError(Errors.E003())
 
         if isinstance(model, dict):
+            additional_info = (
+                {k: v for k, v in model.items() if k not in {"hub", "model", "type"}}
+                if model
+                else {}
+            )
             hub, model, model_type = model["hub"], model["model"], model.get("type")
             self.hub = hub
             self._actual_model = model
         else:
+            additional_info = {}
             hub = None
             model_type = None
 
@@ -202,7 +209,7 @@ class Harness:
         else:
             logging.info(Warnings.W001())
             self._config = self.configure(
-                resource_filename("langtest", "data/config.yml")
+                str(resources.files("langtest").joinpath("data/config.yml"))
             )
 
         # prompt config
@@ -217,16 +224,34 @@ class Harness:
                 model = i["model"]
                 hub = i["hub"]
 
+                # additional info for each model
+                additional_info = (
+                    {k: v for k, v in i.items() if k not in {"hub", "model", "type"}}
+                    if i
+                    else {}
+                )
+
+                # get config from model_parameters
+                model_params = self._config.get("model_parameters", {})
+                if isinstance(model_params, dict) and model in model_params:
+                    # additional info for each model
+                    additional_info = {**model_params[model], **additional_info}
+                else:
+                    # same additional info for all models
+                    additional_info = {**additional_info, **model_params}
+
                 model_dict[model] = self.task.model(
-                    model, hub, model_type, **self._config.get("model_parameters", {})
+                    model, hub, model_type, **additional_info
                 )
 
                 self.model = model_dict
 
         else:
-            self.model = self.task.model(
-                model, hub, model_type, **self._config.get("model_parameters", {})
-            )
+            additional_info = {
+                **(additional_info or {}),
+                **self._config.get("model_parameters", {}),
+            }
+            self.model = self.task.model(model, hub, model_type, **additional_info)
         # end model selection
         formatted_config = json.dumps(self._config, indent=1)
         print("Test Configuration : \n", formatted_config)
@@ -369,7 +394,7 @@ class Harness:
             logging.warning(Warnings.W021())
 
         else:
-            data = [sample.copy() for sample in model_response]
+            data = [sample.model_copy() for sample in model_response]
             data_dict = [{key: value for key, value in x.__dict__.items()} for x in data]
             data_df = pd.DataFrame(data_dict)
             data_df = data_df.reset_index(drop=True)
@@ -437,9 +462,9 @@ class Harness:
                     checkpoint_folder=dataset_checkpoint_dir
                 )
                 harness._checkpoints[dataset_name] = checkpoint_manager.load_checkpoint()
-                harness._testcases[
-                    dataset_name
-                ] = checkpoint_manager.load_remaining_batch()
+                harness._testcases[dataset_name] = (
+                    checkpoint_manager.load_remaining_batch()
+                )
                 harness.batches[dataset_name] = checkpoint_manager.load_batches()
 
         elif isinstance(model, dict):
@@ -458,12 +483,12 @@ class Harness:
                 checkpoint_manager = CheckpointManager(
                     checkpoint_folder=model_checkpoint_dir
                 )
-                harness._checkpoints[
-                    model_name["model"]
-                ] = checkpoint_manager.load_checkpoint()
-                harness._testcases[
-                    model_name["model"]
-                ] = checkpoint_manager.load_remaining_batch()
+                harness._checkpoints[model_name["model"]] = (
+                    checkpoint_manager.load_checkpoint()
+                )
+                harness._testcases[model_name["model"]] = (
+                    checkpoint_manager.load_remaining_batch()
+                )
                 harness.batches[model_name["model"]] = checkpoint_manager.load_batches()
         return harness
 
@@ -515,6 +540,7 @@ class Harness:
         if self.task.category == "ideology":
             self.df_report = report.political_report(self._generated_results)
             return self.df_report
+
         elif self.is_multi_dataset and isinstance(self.model, dict):
             self.df_report = report.multi_dataset_multi_model_report(
                 summary,
@@ -624,6 +650,7 @@ class Harness:
             "original_context",
             "original_question",
             "completion",
+            "dialogue",
             "test_case",
             "perturbed_context",
             "perturbed_image",
@@ -652,6 +679,7 @@ class Harness:
             "log_prob_antistereo",
             "diff_threshold",
             "options",
+            "perturbed_options",
             "expected_result",
             "prompt_toxicity",
             "actual_result",
@@ -742,11 +770,9 @@ class Harness:
         columns = [c for c in column_order if c in generated_results_df.columns]
         generated_results_df = generated_results_df[columns]
 
-        if "degradation_analysis" in generated_results_df["test_type"].unique():
-            # drop the rows with test_type as 'degradation_analysis'
-            generated_results_df = generated_results_df[
-                generated_results_df["test_type"] != "degradation_analysis"
-            ]
+        generated_results_df = generated_results_df[
+            ~generated_results_df["test_type"].isin(["degradation_analysis", "amega"])
+        ]
 
         return generated_results_df.fillna("-")
 
@@ -868,6 +894,7 @@ class Harness:
             "sentence",
             "patient_info_A",
             "patient_info_B",
+            "dialogue",
             "mask1",
             "mask2",
             "sent_stereo",
@@ -890,6 +917,7 @@ class Harness:
             "question",
             "ground_truth",
             "options",
+            "perturbed_options",
             "expected_result",
         ]
 
@@ -998,11 +1026,9 @@ class Harness:
         columns = [c for c in column_order if c in testcases_df.columns]
         testcases_df = testcases_df[columns]
 
-        if "degradation_analysis" in testcases_df["test_type"].unique():
-            # drop the rows with test_type as 'degradation_analysis'
-            testcases_df = testcases_df[
-                testcases_df["test_type"] != "degradation_analysis"
-            ]
+        testcases_df = testcases_df[
+            ~testcases_df["test_type"].isin(["degradation_analysis", "amega"])
+        ]
 
         return testcases_df.fillna("-")
 
@@ -1469,10 +1495,10 @@ class Harness:
             data_path = os.path.join(
                 "data", self.DEFAULTS_DATASET[(self.task, model, hub)]
             )
-            data = {"data_source": resource_filename("langtest", data_path)}
+            data = {"data_source": str(resources.files("langtest").joinpath(data_path))}
             o_data = DataFactory(data, task=self.task).load()
             if model == "textcat_imdb":
-                model = resource_filename("langtest", "data/textcat_imdb")
+                model = str(resources.files("langtest").joinpath("data/textcat_imdb"))
             self.is_default = True
             logging.info(Warnings.W002(info=(self.task, model, hub)))
         elif data is None and self.task.category == "ideology":
@@ -1498,7 +1524,7 @@ class Harness:
         testcases = None
 
         tests = self._config["tests"]
-        m_data = [sample.copy() for sample in dataset]
+        m_data = [sample.model_copy() for sample in dataset]
 
         if self.task in ["text-classification", "ner"]:
             if not isinstance(self.model, dict):
@@ -1593,7 +1619,9 @@ class Harness:
                 testcases = temp_testcases
             else:
                 for model_name, _ in self.model.items():
-                    testcases[model_name] = [sample.copy() for sample in temp_testcases]
+                    testcases[model_name] = [
+                        sample.model_copy() for sample in temp_testcases
+                    ]
 
         else:
             for dataset_name, samples in dataset.items():
