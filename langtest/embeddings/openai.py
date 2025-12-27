@@ -44,13 +44,17 @@ class OpenaiEmbeddings:
             list[float]: A list of floating-point values representing the text's embedding.
         """
         if isinstance(text, list):
-            response = self.openai.Client(api_key=self.api_key).embedding.create(input=text, model=self.model)
+            response = self.openai.Client(api_key=self.api_key).embedding.create(
+                input=text, model=self.model
+            )
             embedding = [
                 np.array(response.data[i].embedding).reshape(1, -1)
                 for i in range(len(text))
             ]
             return embedding
         else:
-            response = self.openai.Client(api_key=self.api_key).embedding.create(input=[text], model=self.model)
+            response = self.openai.Client(api_key=self.api_key).embedding.create(
+                input=[text], model=self.model
+            )
             embedding = np.array(response.data[0].embedding).reshape(1, -1)
             return embedding
