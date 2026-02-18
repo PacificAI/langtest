@@ -9,11 +9,14 @@ class ModelConfig(TypedDict):
         model (str): The name of the model.
         type (Literal['chat', 'completion']): The type of the model, either 'chat' or 'completion'.
         hub (str): The hub where the model is located.
+        task_id (Optional[str]): Optional identifier used to track requests on LitellmProxy
+        by adding this as a toag to extra_body``).
     """
 
     model: str
     type: Literal["chat", "completion"]
     hub: str
+    task_id: Optional[str]
 
 
 class DatasetConfig(TypedDict):

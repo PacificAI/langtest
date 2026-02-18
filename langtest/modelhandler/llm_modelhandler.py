@@ -84,6 +84,13 @@ class PretrainedModelForQA(ModelAPI):
         model_type = kwargs.get("model_type", None)
         output_schema = kwargs.get("output_schema", None)
 
+        # Optional logical task identifier coming from ModelConfig.task_id.
+        # We pull it out early so it doesn't get passed as a raw keyword
+        # argument to the underlying LangChain model classes (which would
+        # raise on unexpected parameters). Instead, we convert it into
+        # provider-specific request metadata (e.g. OpenAI extra_body.metadata).
+        task_id = kwargs.pop("task_id", None)
+
         exclude_args = [
             "task",
             "device",
@@ -99,6 +106,14 @@ class PretrainedModelForQA(ModelAPI):
             filtered_kwargs.pop(arg, None)
         try:
             cls._update_model_parameters(hub, filtered_kwargs)
+
+            # Attach task_id as provider metadata where supported.
+            # For OpenAI-compatible hubs (openai, azure-openai, openrouter),
+            # we use the standard `extra_body={"metadata": {"task_id": ...}}`
+            # pattern so the identifier is available on every completion.
+            if task_id and hub in ("openai", "azure-openai", "openrouter"):
+                extra_body = {"metadata": {"tags": [f"task_id:{task_id}"]}}
+                filtered_kwargs["extra_body"] = extra_body
 
             from .utils import MODEL_CLASSES
 
@@ -226,7 +241,6 @@ class PretrainedModelForQA(ModelAPI):
 
             # prompt configuration
             prompt_manager = PromptManager()
-
             prompt_template = prompt_manager.get_prompt()
 
             if prompt_template is None:
