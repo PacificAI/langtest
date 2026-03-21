@@ -14,7 +14,7 @@ RENAME_HUBS = {
 }
 
 if try_import_lib("langchain"):
-    
+
     from langtest.modelhandler.utils import MODEL_CLASSES
 
     LANGCHAIN_HUBS = {

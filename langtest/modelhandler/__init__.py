@@ -34,7 +34,7 @@ for library_name, import_statement in libraries:
 
 if "langchain" in INSTALLED_HUBS:
     from langtest.modelhandler.utils import MODEL_CLASSES
-    
+
     LANGCHAIN_HUBS = {
         (
             RENAME_HUBS.get(hub.lower(), hub.lower())
