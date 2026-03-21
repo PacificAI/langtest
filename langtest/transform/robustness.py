@@ -305,7 +305,14 @@ class BaseRobustness(ABC):
         "translation",
     ]
 
-    TestConfig = TypedDict("TestConfig", min_pass_rate=float, prob=float)
+    TestConfig = TypedDict(
+        "TestConfig",
+        # min_pass_rate=float, prob=float
+        {
+            "min_pass_rate": float,
+            "prob": float,
+        },
+    )
 
     @staticmethod
     @abstractmethod
@@ -515,9 +522,16 @@ class AddPunctuation(BaseRobustness):
     """A class for adding punctuation to text samples."""
 
     alias_name = "add_punctuation"
-    parameters = TypedDict("parameters", whitelist=List[str])
+    parameters = TypedDict("parameters", {"whitelist": List[str]})
     TestConfig = TypedDict(
-        "TestConfig", min_pass_rate=float, prob=float, parameters=parameters, count=int
+        "TestConfig",
+        # min_pass_rate=float, prob=float, parameters=parameters, count=int
+        {
+            "min_pass_rate": float,
+            "prob": float,
+            "parameters": parameters,
+            "count": int,
+        },
     )
 
     @staticmethod
@@ -589,12 +603,17 @@ class StripPunctuation(BaseRobustness):
     """A class for stripping punctuation to text samples."""
 
     alias_name = "strip_punctuation"
-    parameters = TypedDict("parameters", whitelist=List[str])
+    parameters = TypedDict("parameters", {"whitelist": List[str]})
     TestConfig = TypedDict(
         "TestConfig",
-        min_pass_rate=float,
-        prob=float,
-        parameters=parameters,
+        # min_pass_rate=float,
+        # prob=float,
+        # parameters=parameters,
+        {
+            "min_pass_rate": float,
+            "prob": float,
+            "parameters": parameters,
+        },
     )
 
     @staticmethod
@@ -659,7 +678,15 @@ class AddTypo(BaseRobustness):
     alias_name = "add_typo"
 
     # TestConfig
-    TestConfig = TypedDict("TestConfig", min_pass_rate=float, prob=float, count=int)
+    TestConfig = TypedDict(
+        "TestConfig",
+        # min_pass_rate=float, prob=float, count=int
+        {
+            "min_pass_rate": float,
+            "prob": float,
+            "count": int,
+        },
+    )
 
     @staticmethod
     def transform(
@@ -735,11 +762,17 @@ class SwapEntities(BaseRobustness):
     supported_tasks = ["ner"]
 
     # parameters
-    parameters = TypedDict("parameters", labels=List[List[str]], count=int)
+    parameters = TypedDict("parameters", {"labels": List[List[str]], "count": int})
 
     # TestConfig
     TestConfig = TypedDict(
-        "TestConfig", min_pass_rate=float, prob=float, parameters=parameters
+        "TestConfig",
+        # min_pass_rate=float, prob=float, parameters=parameters
+        {
+            "min_pass_rate": float,
+            "prob": float,
+            "parameters": parameters,
+        },
     )
 
     @staticmethod
@@ -1378,11 +1411,17 @@ class AddSpeechToTextTypo(BaseRobustness):
     alias_name = "add_speech_to_text_typo"
 
     # additional parameters
-    parameters = TypedDict("parameters", count=int)
+    parameters = TypedDict("parameters", {"count": int})
 
     # TestConfig
     TestConfig = TypedDict(
-        "TestConfig", min_pass_rate=float, prob=float, parameters=parameters
+        "TestConfig",
+        # min_pass_rate=float, prob=float, parameters=parameters
+        {
+            "min_pass_rate": float,
+            "prob": float,
+            "parameters": parameters,
+        },
     )
 
     @staticmethod
@@ -1802,11 +1841,17 @@ class StripAllPunctuation(BaseRobustness):
     alias_name = "strip_all_punctuation"
 
     # additional parameters
-    parameters = TypedDict("parameters", whitelist=List[str])
+    parameters = TypedDict("parameters", {"whitelist": List[str]})
 
     # TestConfig
     TestConfig = TypedDict(
-        "TestConfig", min_pass_rate=float, prob=float, parameters=parameters
+        "TestConfig",
+        # min_pass_rate=float, prob=float, parameters=parameters
+        {
+            "min_pass_rate": float,
+            "prob": float,
+            "parameters": parameters,
+        },
     )
 
     @staticmethod
@@ -1935,11 +1980,17 @@ class RandomAge(BaseRobustness):
     alias_name = "randomize_age"
 
     # additional parameters
-    parameters = TypedDict("parameters", random_amount=int, count=int)
+    parameters = TypedDict("parameters", {"random_amount": int, "count": int})
 
     # TestConfig
     TestConfig = TypedDict(
-        "TestConfig", min_pass_rate=float, prob=float, parameters=parameters
+        "TestConfig",
+        # min_pass_rate=float, prob=float, parameters=parameters
+        {
+            "min_pass_rate": float,
+            "prob": float,
+            "parameters": parameters,
+        },
     )
 
     @staticmethod
@@ -2027,11 +2078,17 @@ class AddNewLines(BaseRobustness):
     supported_tasks = ["text-classification", "question-answering", "summarization"]
 
     # additional parameters
-    parameters = TypedDict("parameters", max_lines=int, count=int)
+    parameters = TypedDict("parameters", {"max_lines": int, "count": int})
 
     # TestConfig
     TestConfig = TypedDict(
-        "TestConfig", min_pass_rate=float, prob=float, parameters=parameters
+        "TestConfig",
+        # min_pass_rate=float, prob=float, parameters=parameters
+        {
+            "min_pass_rate": float,
+            "prob": float,
+            "parameters": parameters,
+        },
     )
 
     @staticmethod
@@ -2139,11 +2196,17 @@ class AddTabs(BaseRobustness):
     supported_tasks = ["text-classification", "question-answering", "summarization"]
 
     # additional parameters
-    parameters = TypedDict("parameters", count=int, max_tabs=int)
+    parameters = TypedDict("parameters", {"count": int, "max_tabs": int})
 
     # TestConfig
     TestConfig = TypedDict(
-        "TestConfig", min_pass_rate=float, prob=float, parameters=parameters
+        "TestConfig",
+        # min_pass_rate=float, prob=float, parameters=parameters
+        {
+            "min_pass_rate": float,
+            "prob": float,
+            "parameters": parameters,
+        },
     )
 
     @staticmethod
