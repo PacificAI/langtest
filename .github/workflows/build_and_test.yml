@@ -17,7 +17,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python-version: ["3.12", "3.13", "3.14", "3.15" ]
+        python-version: ["3.12", "3.13", "3.14"]
 
     steps:
       - name: Free up disk space at start
@@ -25,7 +25,6 @@ jobs:
           sudo apt clean
           sudo rm -rf /usr/share/dotnet /usr/local/lib/android /opt/ghc
           sudo rm -rf "/usr/local/share/boost"
-          sudo rm -rf "$AGENT_TOOLSDIRECTORY"
           df -h
 
       - uses: actions/checkout@v3

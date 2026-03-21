@@ -1,11 +1,11 @@
 from collections import defaultdict
-from typing import Dict, List, Optional, Union
+from typing import Any, Dict, List, Optional, Union, ClassVar
 
-from pydantic.v1 import BaseModel, validator, Extra, ConfigDict
+from pydantic import BaseModel, ConfigDict, model_validator
 
 
 class MessageType(BaseModel):
-    __field_order: List[str] = [
+    __field_order: ClassVar[List[str]] = [
         "content",
         "context",
         "question",
@@ -15,14 +15,15 @@ class MessageType(BaseModel):
         "answer",
     ]
 
-    model_config = ConfigDict(extra=Extra.allow)
+    model_config = ConfigDict(extra="allow")
 
-    @validator("*", pre=True, allow_reuse=True)
-    def add_field(cls, v, values, field, **kwargs):
-        if "fields" not in values:
-            values["fields"] = []
-        values["fields"].append(field)
-        return v
+    @model_validator(mode="before")
+    def add_field(cls, data: Any):
+        if isinstance(data, dict):
+            data = dict(data)
+            data.setdefault("fields", [])
+            data["fields"] = [k for k in data.keys() if k != "fields"]
+        return data
 
     @property
     def get_template(self):
@@ -70,14 +71,16 @@ class Conversion(BaseModel):
     user: MessageType
     ai: MessageType
 
-    model_config = ConfigDict(extra=Extra.allow)
+    model_config = ConfigDict(extra="allow")
 
-    @validator("*", pre=True, allow_reuse=True)
-    def add_field(cls, v, values, field, **kwargs):
-        if "fields" not in values:
-            values["fields"] = []
-        values["fields"].append(field)
-        return v
+    @model_validator(mode="before")
+    @classmethod
+    def add_field(cls, data: Any):
+        if isinstance(data, dict):
+            data = dict(data)
+            data.setdefault("fields", [])
+            data["fields"] = [k for k in data.keys() if k != "fields"]
+        return data
 
     @property
     def get_examples(self):
