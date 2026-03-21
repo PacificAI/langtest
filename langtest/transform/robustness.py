@@ -956,15 +956,27 @@ class AddContext(BaseRobustness):
     # additional parameters
     parameters = TypedDict(
         "parameters",
-        starting_context=List[str],
-        ending_context=List[str],
-        strategy=str,
-        count=int,
+        # starting_context=List[str],
+        # ending_context=List[str],
+        # strategy=str,
+        # count=int,
+        {
+            "starting_context": List[str],
+            "ending_context": List[str],
+            "strategy": str,
+            "count": int,
+        },
     )
 
     # TestConfig
     TestConfig = TypedDict(
-        "TestConfig", min_pass_rate=float, prob=float, parameters=parameters
+        "TestConfig",
+        # min_pass_rate=float, prob=float, parameters=parameters
+        {
+            "min_pass_rate": float,
+            "prob": float,
+            "parameters": parameters,
+        },
     )
 
     @staticmethod
