@@ -1,5 +1,5 @@
 from collections import defaultdict
-from typing import Dict, List, Union
+from typing import Dict, List, Optional, Union
 
 from pydantic.v1 import BaseModel, validator, Extra, ConfigDict
 
@@ -93,7 +93,7 @@ class Conversion(BaseModel):
 class PromptConfig(BaseModel):
     instructions: str
     prompt_type: str
-    examples: Union[Conversion, List[Conversion]] = None
+    examples: Optional[Union[Conversion, List[Conversion]]] = None
 
     @property
     def get_examples(self) -> List[dict]:
@@ -208,9 +208,9 @@ class PromptConfig(BaseModel):
 
 
 class PromptManager:
-    _instance = None
+    _instance: "PromptManager" = None
     prompt_configs: Dict[str, PromptConfig] = defaultdict(PromptConfig)
-    _default_state = None
+    _default_state: str = None
 
     def __new__(cls, *args, **kwargs):
         if cls._instance is None:
