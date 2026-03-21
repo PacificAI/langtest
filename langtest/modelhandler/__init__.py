@@ -33,15 +33,15 @@ for library_name, import_statement in libraries:
 
 
 if "langchain" in INSTALLED_HUBS:
-    import langchain
-
+    from langtest.modelhandler.utils import MODEL_CLASSES
+    
     LANGCHAIN_HUBS = {
         (
             RENAME_HUBS.get(hub.lower(), hub.lower())
             if hub.lower() in RENAME_HUBS
             else hub.lower()
         ): hub
-        for hub in langchain.llms.__all__
+        for hub in list(MODEL_CLASSES.keys())
     }
     LANGCHAIN_HUBS["openrouter"] = "openrouter"
 
