@@ -99,7 +99,10 @@ class BasePerformance(ABC):
     # TestConfig
     TestConfig = TypedDict(
         "TestConfig",
-        min_pass_rate=float,
+        # min_pass_rate=float,
+        {
+            "min_pass_rate": float,
+        },
     )
 
     @staticmethod

@@ -267,7 +267,7 @@ class BaseBias(ABC):
     ]
 
     # Config Hint for the bias tests
-    TestConfig = TypedDict("TestConfig", min_pass_rate=float)
+    TestConfig = TypedDict("TestConfig", {"min_pass_rate": float})
 
     @abstractmethod
     def transform(self, sample_list: List[Sample], *args, **kwargs) -> List[Sample]:
