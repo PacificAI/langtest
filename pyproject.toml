@@ -55,7 +55,7 @@ extend-exclude = "langtest/transform/constants.py"
 exclude = 'langtest/errors.py'
 
 [tool.poetry.dependencies]
-python = ">=3.9,<4.0"
+python = ">=3.12,<4.0"
 pydantic = ">=2.10.0"
 johnsnowlabs = {version = "^6.0.4", optional = true}
 rouge-score = { version = "^0.1.2", optional = true }
@@ -75,7 +75,7 @@ ai21 = {version = "^1.1.0", optional = true}
 metaflow = {version = ">=2.9.0", optional = true}
 accelerate = {version = "^1.10.0", optional = true}
 seqeval = {version = "^1.2.0", optional = true}
-mlflow = {version = "3.1.1", optional = true}
+mlflow = {version = ">=3.10.1", optional = true}
 datasets = {version = ">=3.6.0", optional = true}
 matplotlib = {version = "^3.7.2", optional = true}
 tenacity = {version = "^8.2.2", optional = true}
