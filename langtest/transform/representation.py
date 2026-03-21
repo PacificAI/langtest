@@ -192,8 +192,12 @@ class GenderRepresentation(BaseRepresentation):
     # Config Hint for the representation tests
     TestConfig = TypedDict(
         "TestConfig",
-        min_count=Union[min_count, int],
-        min_proportion=Union[min_proportion, float],
+        # min_count=Union[min_count, int],
+        # min_proportion=Union[min_proportion, float],
+        {
+            "min_count": Union[min_count, int],
+            "min_proportion": Union[min_proportion, float],
+        },
     )
 
     @classmethod
