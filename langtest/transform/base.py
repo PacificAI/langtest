@@ -201,7 +201,7 @@ class TestFactory:
             category_output = all_categories[each].run(
                 values, model_handler, progress_bar=tests, **kwargs
             )
-            if type(category_output) == list:
+            if isinstance(category_output, list):
                 all_results.extend(category_output)
             else:
                 all_results.append(category_output)
@@ -264,7 +264,7 @@ class ITests(ABC):
             if len(test_name.split("-")) > 1:
                 test_name = "multiple_perturbations"
             test_output = supported_tests[test_name].async_run(samples, model, **kwargs)
-            if type(test_output) == list:
+            if isinstance(test_output, list):
                 tasks.extend(test_output)
             else:
                 tasks.append(test_output)
