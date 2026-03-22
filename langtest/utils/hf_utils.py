@@ -201,12 +201,17 @@ class HuggingFacePipeline:
                 AutoModelForCausalLM,
                 AutoModelForSeq2SeqLM,
                 AutoTokenizer,
+                AutoConfig,
             )
             from transformers import pipeline as hf_pipeline
         except ImportError:
             raise ValueError(Errors.E085())
 
         tokenizer = AutoTokenizer.from_pretrained(model_id)
+        config = AutoConfig.from_pretrained(model_id)
+
+        # find the model type
+        config.architectures
 
         # remove the unnecessary kwargs
         kwargs.pop("model_type", None)
@@ -215,10 +220,26 @@ class HuggingFacePipeline:
         tokenizer.pad_token_id = tokenizer.eos_token_id
 
         try:
-            if task == "text-generation":
-                model = AutoModelForCausalLM.from_pretrained(model_id)
-            elif task in ("text2text-generation", "summarization"):
+            if task in ("text2text-generation", "summarization") or (
+                config.architectures
+                and any(
+                    any(arch_name in arch.lower() for arch_name in [
+                        "t5",
+                        "bart",
+                        "led",
+                        "mbart",
+                        "pegasus",
+                        "blenderbot",
+                        "blenderbotsmall",
+                        "marian",
+                        "mt5",
+                    ])
+                    for arch in config.architectures
+                )
+            ):
                 model = AutoModelForSeq2SeqLM.from_pretrained(model_id)
+            elif task == "text-generation":
+                model = AutoModelForCausalLM.from_pretrained(model_id)
             else:
                 raise ValueError(Errors.E086(task=task))
         except ImportError as e:

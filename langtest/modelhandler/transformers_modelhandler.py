@@ -441,7 +441,7 @@ class PretrainedModelForTranslation(ModelAPI):
         tgt_lang = config.get("target_language") or kwargs.get("target_language")
 
         if "t5" in path:
-            return cls(pipeline(f"translation_en_to_{tgt_lang}", model=path))
+            return cls(pipeline("text-generation", model=path))
         else:
             return cls(pipeline(model=path, src_lang="en", tgt_lang=tgt_lang))
 
