@@ -746,7 +746,6 @@ class PretrainedModelForQA(ModelAPI):
             task = filtered_kwargs.pop("task", None)
             tasks = [
                 "text-generation",
-                "text2text-generation",
                 "summarization",
             ]  # Add more tasks if needed
 

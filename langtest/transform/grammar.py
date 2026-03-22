@@ -180,7 +180,7 @@ class Paraphrase(BaseGrammar):
             from transformers import pipeline
 
             pipe = pipeline(
-                "text2text-generation", model="humarin/chatgpt_paraphraser_on_T5_base"
+                "text-generation", model="humarin/chatgpt_paraphraser_on_T5_base"
             )
             for idx, sample in enumerate(sample_list):
                 if isinstance(sample, str):
