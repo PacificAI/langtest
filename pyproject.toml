@@ -60,7 +60,7 @@ pydantic = ">=2.10.0"
 johnsnowlabs = {version = "^6.0.4", optional = true}
 rouge-score = { version = "^0.1.2", optional = true }
 evaluate = { version = "^0.4.0", optional = true }
-transformers = ">=5.3.0"
+transformers = {version = ">=5.3.0", extras = ["sentencepiece"]}
 huggingface_hub = { version = ">0.16.0", optional = true}
 spacy = {version = "3.8.11", optional = true}
 nest-asyncio = "^1.5.0"
@@ -121,9 +121,10 @@ pre-commit = "^3.3.3"
 pydocstyle = "^6.3.0"
 ipykernel = "^6.29.5"
 pytest-cov = "^6.0.0"
+pytest-xdist = "^3.8.0"
 
 [tool.taskipy.tasks]
-test = "pytest tests/* -v --disable-warnings"
+test = "pytest tests/* -v --disable-warnings -n auto"
 lint = "pflake8 langtest/"
 format = "black langtest/ tests/"
 check-docstrings = "pydocstyle langtest/ --add-select=D417 --add-ignore=D100,D104,D105,D400,D415 --convention=google"

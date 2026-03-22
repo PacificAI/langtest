@@ -75,7 +75,6 @@ MODEL_CLASSES: Dict[str, Union[Info, str]] = {
     "gigachat": "GigaChat",
     "google_palm": "ChatGooglePalm",
     "gpt_router": "GPTRouter",
-    "huggingface": "ChatHuggingFace",
     "human": "HumanInputChatModel",
     "hunyuan": "ChatHunyuan",
     "javelin_ai_gateway": "ChatJavelinAIGateway",
