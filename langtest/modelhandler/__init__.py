@@ -33,7 +33,7 @@ for library_name, import_statement in libraries:
 
 
 if "langchain" in INSTALLED_HUBS:
-    import langchain
+    import langchain_classic
 
     LANGCHAIN_HUBS = {
         (
@@ -41,7 +41,7 @@ if "langchain" in INSTALLED_HUBS:
             if hub.lower() in RENAME_HUBS
             else hub.lower()
         ): hub
-        for hub in langchain.llms.__all__
+        for hub in langchain_classic.llms.__all__
     }
     LANGCHAIN_HUBS["openrouter"] = "openrouter"
 

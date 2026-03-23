@@ -66,25 +66,22 @@ class EvalTemplate:
                 f"""\n\nScore the student answer based on the following criteria:\n{eval_criteria}"""
             )
 
-        prompt += dedent(
-            f"""
-        Example Format:
-        QUESTION: question here
-        STUDENT ANSWER: student's answer here
-        TRUE ANSWER: true answer here
-        GRADE: {grade_list} here
-
-        {
-            ("Grade the student answers based ONLY on their factual accuracy. Ignore differences"
-             " in punctuation and phrasing between the student answer and true answer. It is OK "
-             "if the student answer contains more or relevant information than the true answer, as"
-             " long as it does not contain any conflicting statements. Begin!")
-        }
-
-        QUESTION: {{query}}
-        STUDENT ANSWER: {{result}}
-        TRUE ANSWER: {{answer}}
-        GRADE:"""
+        prompt += (
+            "Example Format:\n"
+            "QUESTION: question here\n"
+            "STUDENT ANSWER: student's answer here\n"
+            "TRUE ANSWER: true answer here\n"
+            f"GRADE: {grade_list} here"
+            "\n\n"
+            "Grade the student answers based ONLY on their factual accuracy. Ignore differences"
+            " in punctuation and phrasing between the student answer and true answer. It is OK "
+            "if the student answer contains more or relevant information than the true answer, as"
+            " long as it does not contain any conflicting statements. Begin!"
+            "\n\n"
+            "QUESTION: {{query}}\n"
+            "STUDENT ANSWER: {{result}}\n"
+            "TRUE ANSWER: {{answer}}\n"
+            "GRADE:\n"
         )
         return prompt
 

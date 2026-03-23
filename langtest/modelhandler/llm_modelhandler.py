@@ -3,9 +3,9 @@ import inspect
 
 import os
 from typing import Any, List, Type, Union, TypeVar
-import langchain.llms as lc
+import langchain_classic.llms as lc
 import langchain.chat_models as chat_models
-from langchain.chains.llm import LLMChain
+from langchain_classic.chains.llm import LLMChain
 from langchain_core.prompts import PromptTemplate
 from langchain_core.language_models.base import BaseLanguageModel
 from langchain_core.exceptions import OutputParserException

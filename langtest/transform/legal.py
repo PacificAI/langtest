@@ -14,7 +14,10 @@ class LegalTestFactory(ITests):
     # TestConfig
     TestConfig = TypedDict(
         "TestConfig",
-        min_pass_rate=float,
+        # min_pass_rate=float,
+        {
+            "min_pass_rate": float,
+        },
     )
 
     def __init__(self, data_handler: List[Sample], tests: Dict = None, **kwargs) -> None:

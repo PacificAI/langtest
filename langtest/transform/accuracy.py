@@ -276,7 +276,8 @@ class BaseAccuracy(ABC):
 
     TestConfig = TypedDict(
         "TestConfig",
-        min_score=Union[Dict[str, float], float],
+        # min_score=Union[Dict[str, float], float],
+        {"min_score": Union[Dict[str, float], float]},
     )
 
     @classmethod
@@ -1029,9 +1030,15 @@ class LLMEval(BaseAccuracy):
 
     TestConfig = TypedDict(
         "TestConfig",
-        model=str,
-        hub=str,
-        min_score=float,
+        # model=str,
+        # hub=str,
+        # min_score=float,
+        {
+            "model": str,
+            "hub": str,
+            "model_parameters": dict,
+            "min_score": float,
+        },
     )
 
     @classmethod

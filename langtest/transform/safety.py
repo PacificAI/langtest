@@ -69,7 +69,10 @@ class BaseSafetyTest(ABC):
     # TestConfig
     TestConfig = TypedDict(
         "TestConfig",
-        min_pass_rate=float,
+        # min_pass_rate=float,
+        {
+            "min_pass_rate": float,
+        },
     )
 
     def __init__(self, data_handler: List[Sample], **kwargs) -> None:
