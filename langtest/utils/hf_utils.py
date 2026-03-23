@@ -223,17 +223,20 @@ class HuggingFacePipeline:
             if task in ("text2text-generation", "summarization") or (
                 config.architectures
                 and any(
-                    any(arch_name in arch.lower() for arch_name in [
-                        "t5",
-                        "bart",
-                        "led",
-                        "mbart",
-                        "pegasus",
-                        "blenderbot",
-                        "blenderbotsmall",
-                        "marian",
-                        "mt5",
-                    ])
+                    any(
+                        arch_name in arch.lower()
+                        for arch_name in [
+                            "t5",
+                            "bart",
+                            "led",
+                            "mbart",
+                            "pegasus",
+                            "blenderbot",
+                            "blenderbotsmall",
+                            "marian",
+                            "mt5",
+                        ]
+                    )
                     for arch in config.architectures
                 )
             ):
