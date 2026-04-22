@@ -17,7 +17,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python-version: [ "3.9","3.10", "3.11" ]
+        python-version: ["3.12", "3.13" ]
 
     steps:
       - name: Free up disk space at start
@@ -53,7 +53,7 @@ jobs:
         if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true'
         run: |
           poetry cache clear pypi --all -n > /dev/null
-          poetry install --with dev --all-extras --no-cache --quiet --no-interaction
+          poetry install --with dev --all-extras --no-cache --no-interaction
           source ./.venv/bin/activate && pip uninstall -y pyspark && rm -rf ./.venv/lib/python${{ matrix.python-version }}/site-packages/pyspark*/
           pip install pyspark==3.5.6
 

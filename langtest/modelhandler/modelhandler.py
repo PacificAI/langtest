@@ -14,8 +14,8 @@ RENAME_HUBS = {
 }
 
 if try_import_lib("langchain"):
-    import langchain
-    import langchain.llms
+    import langchain_classic
+    import langchain_classic.llms
 
     LANGCHAIN_HUBS = {
         (
@@ -23,7 +23,7 @@ if try_import_lib("langchain"):
             if hub.lower() in RENAME_HUBS
             else hub.lower()
         ): hub
-        for hub in langchain.llms.__all__
+        for hub in langchain_classic.llms.__all__
     }
     LANGCHAIN_HUBS["openrouter"] = "openrouter"
 else:

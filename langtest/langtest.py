@@ -286,7 +286,7 @@ class Harness:
         Returns:
             dict: Loaded configuration.
         """
-        if type(config) == dict:
+        if isinstance(config, dict):
             self._config = config
         else:
             with open(config, "r", encoding="utf-8") as yml:

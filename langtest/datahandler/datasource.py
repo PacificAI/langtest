@@ -808,7 +808,7 @@ class CSVDataset(BaseDataset):
                 parsed CSV file into list of dicts
         """
 
-        if type(self._file_path) == dict:
+        if isinstance(self._file_path, dict):
             df = pd.read_csv(self._file_path["data_source"])
 
             if self.task == "text-classification":

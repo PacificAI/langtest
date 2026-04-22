@@ -21,6 +21,12 @@ from langtest.errors import Errors
 from langtest.transform.base import ITests
 
 
+class GenderedConfig(TypedDict):
+    male: float
+    female: float
+    unknown: float
+
+
 class FairnessTestFactory(ITests):
     """
     A class for performing fairness tests on a given dataset.
@@ -292,8 +298,12 @@ class BaseFairness(ABC):
 
     TestConfig = TypedDict(
         "TestConfig",
-        min_score=Union[float, Dict[str, float]],
-        max_score=Union[float, Dict[str, float]],
+        # min_score=Union[float, Dict[str, float]],
+        # max_score=Union[float, Dict[str, float]],
+        {
+            "min_score": Union[float, Dict[str, float]],
+            "max_score": Union[float, Dict[str, float]],
+        },
     )
 
     @staticmethod
@@ -361,16 +371,12 @@ class MinGenderF1Score(BaseFairness):
 
     alias_name = ["min_gender_f1_score"]
 
-    min_score = TypedDict(
-        "min_score",
-        male=float,
-        female=float,
-        unknown=float,
-    )
-
     TestConfig = TypedDict(
         "TestConfig",
-        min_score=Union[min_score, float],
+        # min_score=Union[min_score, float],
+        {
+            "min_score": Union[GenderedConfig, float],
+        },
     )
 
     @classmethod
@@ -476,16 +482,12 @@ class MaxGenderF1Score(BaseFairness):
 
     alias_name = ["max_gender_f1_score"]
 
-    max_score = TypedDict(
-        "max_score",
-        male=float,
-        female=float,
-        unknown=float,
-    )
-
     TestConfig = TypedDict(
         "TestConfig",
-        max_score=Union[max_score, float],
+        # max_score=Union[max_score, float],
+        {
+            "max_score": Union[GenderedConfig, float],
+        },
     )
 
     @classmethod
@@ -599,16 +601,12 @@ class MinGenderRougeScore(BaseFairness):
     ]
     supported_tasks = ["question-answering", "summarization"]
 
-    min_score = TypedDict(
-        "min_score",
-        male=float,
-        female=float,
-        unknown=float,
-    )
-
     TestConfig = TypedDict(
         "TestConfig",
-        min_score=Union[min_score, float],
+        # min_score=Union[min_score, float],
+        {
+            "min_score": Union[GenderedConfig, float],
+        },
     )
 
     @classmethod
@@ -720,16 +718,12 @@ class MaxGenderRougeScore(BaseFairness):
     ]
     supported_tasks = ["question-answering", "summarization"]
 
-    max_score = TypedDict(
-        "max_score",
-        male=float,
-        female=float,
-        unknown=float,
-    )
-
     TestConfig = TypedDict(
         "TestConfig",
-        max_score=Union[max_score, float],
+        # max_score=Union[max_score, float],
+        {
+            "max_score": Union[GenderedConfig, float],
+        },
     )
 
     @classmethod
@@ -835,16 +829,9 @@ class MinGenderLLMEval(BaseFairness):
     supported_tasks = ["question-answering"]
     eval_model = None
 
-    min_score = TypedDict(
-        "min_score",
-        male=float,
-        female=float,
-        unknown=float,
-    )
-
     TestConfig = TypedDict(
         "TestConfig",
-        min_score=Union[min_score, float],
+        {"min_score": Union[GenderedConfig, float]},
     )
 
     @classmethod
@@ -983,16 +970,9 @@ class MaxGenderLLMEval(BaseFairness):
     supported_tasks = ["question-answering"]
     eval_model = None
 
-    max_score = TypedDict(
-        "max_score",
-        male=float,
-        female=float,
-        unknown=float,
-    )
-
     TestConfig = TypedDict(
         "TestConfig",
-        max_score=Union[max_score, float],
+        {"max_score": Union[GenderedConfig, float]},
     )
 
     @classmethod

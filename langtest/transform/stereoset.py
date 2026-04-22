@@ -17,8 +17,12 @@ class StereoSetTestFactory(ITests):
     # TestConfig
     TestConfig = TypedDict(
         "TestConfig",
-        min_pass_rate=float,
-        diff_threshold=float,
+        # min_pass_rate=float,
+        # diff_threshold=float,
+        {
+            "min_pass_rate": float,
+            "diff_threshold": float,
+        },
     )
 
     def __init__(self, data_handler: List[Sample], tests: Dict = None, **kwargs) -> None:
